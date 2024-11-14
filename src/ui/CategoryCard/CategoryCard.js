@@ -16,7 +16,7 @@ function CategoryCard(props) {
       }
       style={[styles.container, props.style]}>
       <View style={styles.textViewContainer}>
-        <TextDefault numberOfLines={1} H5>
+        <TextDefault numberOfLines={1} H6>
           {props.cardLabel}
         </TextDefault>
       </View>
