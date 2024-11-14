@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.headerbackground
   },
   grayBackground: {
-    backgroundColor: colors.backgroudGray
+    backgroundColor: colors.white
   },
   headerText: {
     height: scale(80),
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingLeft: width * 0.05,
     paddingRight: width * 0.05,
-    ...alignment.MTlarge
+    ...alignment.MTlarge,
   },
   cardStyle: {
     marginRight: width * 0.1,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    ...alignment.MBlarge
+    ...alignment.MBlarge,
   },
   image: {
     width: scale(130),

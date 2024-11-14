@@ -1,19 +1,15 @@
 import { StyleSheet } from 'react-native'
-import { colors, alignment } from '../../utils'
+import { colors, alignment, scale } from '../../utils'
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: colors.container,
-    justifyContent: 'center',
-    alignItems: 'center',
-    ...alignment.PxSmall
-  },
+  
   cardImageContainer: {
-    width: '100%',
-    height: '100%',
-    position: 'relative'
+    width: '105%',
+    height: '105%',
+    position: 'relative',
+    backgroundColor: colors.backgroudGray,
+    borderRadius: scale(5 )
+    
   },
   imgResponsive: {
     flex: 1,

@@ -1,23 +1,40 @@
-import { StyleSheet, Dimensions } from 'react-native'
-import { colors, scale, alignment } from '../../utils'
-const { width } = Dimensions.get('window')
+import { StyleSheet, Dimensions } from 'react-native';
+import { colors, scale } from '../../utils';
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
-    width: width * 0.4,
-    height: scale(50),
-    backgroundColor: colors.whiteColor,
-    borderRadius: scale(5),
-    ...alignment.MTxSmall,
-    ...alignment.MRxSmall
+    alignItems: 'center',
+    margin: scale(4),
+    width: width * 0.21,
   },
-  textViewContainer: {
-    width: '100%',
-    height: '100%',
+  iconContainer: {
+    width: scale(60),
+    height: scale(60),
+    borderRadius: scale(40),
+    backgroundColor: '#D8EDE3',
     justifyContent: 'center',
     alignItems: 'center',
-    ...alignment.PRxSmall,
-    ...alignment.PLxSmall
-  }
-})
-export default styles
+    marginBottom: scale(1),
+  },
+  icon: {
+    width: scale(30),
+    height: scale(30),
+    resizeMode: 'contain',
+  },
+  textContainer: {
+    alignItems: 'center',
+    marginBottom: scale(2),
+  },
+  dummyImage: {
+    width: scale(60),
+    height: scale(60), // Adjusted to better fit within iconContainer
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: [{ translateX: -scale(30) }, { translateY: -scale(30) }], // Centers the image within iconContainer
+  },
+});
+
+export default styles;

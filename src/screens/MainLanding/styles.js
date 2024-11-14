@@ -58,17 +58,31 @@ const styles = StyleSheet.create({
     ...alignment.MTsmall,
     ...alignment.MRlarge
   },
+  iconContainer: {
+    width: scale(60),  // Adjust width as needed
+    height: verticalScale(60),  // Adjust height
+    marginRight: scale(27),  // Decreased space between containers
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: scale(40),
+    overflow: 'hidden',
+    backgroundColor: '#E6F7F0',  // Replace this with your desired color code
+    marginTop: scale(16)
+  },  
+  iconImage: {
+    width: '100%',  // Image fills the container
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    resizeMode: 'cover',  // Ensures image covers the circle without distortion
+  },
   categoryContainer: {
-    width: '90%',
-    alignSelf: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    ...alignment.MTlarge
+    marginTop: verticalScale(10),
+    paddingHorizontal: scale(10), // Adjust for proper spacing
   },
   titleSpacer: {
     marginLeft: '5%',
-    marginTop: scale(30)
+    marginTop: scale(35)
   },
   productCard: {
     marginLeft: '5%',
@@ -77,8 +91,23 @@ const styles = StyleSheet.create({
     marginTop: scale(10),
     marginBottom: scale(20)
   },
+  seeAllTextContainer: {
+    flex: 1, // Ensures it takes the remaining space and pushes text to the right
+    alignItems: 'flex-end', // Aligns text to the right
+    marginTop: scale(9), // If you want a bit of space above
+  },
+  
+  seeAllText: {
+    textAlign: 'right', // Align the text itself to the right
+    marginRight: '6%',
+    marginTop: scale(-25), // Move the "See All" text upwards (negative value to shift it up)
+    fontWeight: 'bold',
+    color: '#01AC66',
+    fontSize: 17,
+  },
+  
   spacer: {
     ...alignment.MBsmall
-  }
+  },
 })
 export default styles

@@ -20,76 +20,37 @@ function Drawer() {
     </SideDrawer.Navigator>
   )
 }
+
 function noDrawer() {
   return (
     <NavigationStack.Navigator headerMode="none">
-      <NavigationStack.Screen
-        name="MainLanding"
-        component={Screen.MainLanding}
-      />
-      <NavigationStack.Screen
-        name="AddressList"
-        component={Screen.AddressList}
-      />
-      <NavigationStack.Screen
-        name="DeleteButton"
-        component={Screen.DeleteButton}
-      />
+      <NavigationStack.Screen name="MainLanding" component={Screen.MainLanding} />
+      <NavigationStack.Screen name="AddressList" component={Screen.AddressList} />
+      <NavigationStack.Screen name="DeleteButton" component={Screen.DeleteButton} />
       <NavigationStack.Screen name="Checkout" component={Screen.Checkout} />
       <NavigationStack.Screen name="Payment" component={Screen.Payment} />
       <NavigationStack.Screen name="Paypal" component={Screen.Paypal} />
-      <NavigationStack.Screen
-        name="StripeCheckout"
-        component={Screen.StripeCheckout}
-      />
-      <NavigationStack.Screen
-        name="EditAddress"
-        component={Screen.EditAddress}
-      />
+      <NavigationStack.Screen name="StripeCheckout" component={Screen.StripeCheckout} />
+      <NavigationStack.Screen name="EditAddress" component={Screen.EditAddress} />
       <NavigationStack.Screen name="NewAddress" component={Screen.NewAddress} />
-      <NavigationStack.Screen
-        name="EditingProfile"
-        component={Screen.EditingProfile}
-      />
-      <NavigationStack.Screen
-        name="OrderDetail"
-        component={Screen.OrderDetail}
-      />
-      <NavigationStack.Screen
-        name="PreviousOrders"
-        component={Screen.PreviousOrders}
-      />
-      <NavigationStack.Screen
-        name="ProductDescription"
-        component={Screen.ProductDescription}
-      />
-      <NavigationStack.Screen
-        name="ProductListing"
-        component={Screen.ProductListing}
-      />
-      <NavigationStack.Screen
-        name="ProfileDashboard"
-        component={Screen.ProfileDashboard}
-      />
-      <NavigationStack.Screen
-        name="SearchResult"
-        component={Screen.SearchResults}
-      />
-      <NavigationStack.Screen
-        name="ShoppingCart"
-        component={Screen.ShoppingCart}
-      />
+      <NavigationStack.Screen name="EditingProfile" component={Screen.EditingProfile} />
+      <NavigationStack.Screen name="OrderDetail" component={Screen.OrderDetail} />
+      <NavigationStack.Screen name="PreviousOrders" component={Screen.PreviousOrders} />
+      <NavigationStack.Screen name="ProductDescription" component={Screen.ProductDescription} />
+      <NavigationStack.Screen name="ProductListing" component={Screen.ProductListing} />
+      <NavigationStack.Screen name="ProfileDashboard" component={Screen.ProfileDashboard} />
+      <NavigationStack.Screen name="SearchResult" component={Screen.SearchResults} />
+      <NavigationStack.Screen name="ShoppingCart" component={Screen.ShoppingCart} />
       <NavigationStack.Screen name="TrackOrder" component={Screen.TrackOrder} />
       <NavigationStack.Screen name="Review" component={Screen.Review} />
-      <NavigationStack.Screen name="Category" component={Screen.Category} />
-      <NavigationStack.Screen
-        name="SubCategory"
-        component={Screen.SubCategory}
-      />
+      <NavigationStack.Screen name="CategoryPage" component={Screen.Category} />
+      <NavigationStack.Screen name="SubCategory" component={Screen.SubCategory} />
       <NavigationStack.Screen name="Favourite" component={Screen.Favourite} />
-
       <NavigationStack.Screen name="SignIn" component={Screen.SignIn} />
       <NavigationStack.Screen name="SignUp" component={Screen.SignUp} />
+      
+      {/* Add the CategoryCard screen here */}
+      <NavigationStack.Screen name="Category" component={Screen.Category} />
     </NavigationStack.Navigator>
   )
 }

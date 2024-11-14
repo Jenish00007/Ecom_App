@@ -15,26 +15,7 @@ function SubCategoryCard(props) {
       }
       style={[styles.container, props.style]}>
       <View style={styles.cardImageContainer}>
-        <ImageBackground
-          source={
-            props.data.image
-              ? { uri: props.data.image }
-              : require('../../assets/images/formBackground.png')
-          }
-          defaultSource={require('../../assets/images/formBackground.png')}
-          resizeMode="cover"
-          style={styles.imgResponsive}>
-          <View style={styles.cardText}>
-            <TextDefault
-              numberOfLines={1}
-              textColor={colors.white}
-              H5
-              style={alignment.PxSmall}
-              center>
-              {props.data?.title ?? '....'}
-            </TextDefault>
-          </View>
-        </ImageBackground>
+        
       </View>
     </TouchableOpacity>
   )

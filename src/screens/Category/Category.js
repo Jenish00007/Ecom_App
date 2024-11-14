@@ -1,18 +1,18 @@
-import React from 'react'
-import { View, FlatList } from 'react-native'
-import styles from './styles'
-import CategoryCard from '../../ui/CategoryCard/CategoryCard'
-import { BottomTab, BackHeader, TextError, Spinner } from '../../components'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { gql, useQuery } from '@apollo/client'
-import { categories } from '../../apollo/server'
+import React from 'react';
+import { View, FlatList } from 'react-native';
+import styles from './styles';
+import CategoryCard from '../../ui/CategoryCard/CategoryCard';
+import { BottomTab, BackHeader, TextError, Spinner } from '../../components';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { gql, useQuery } from '@apollo/client';
+import { categories } from '../../apollo/server';
 
 const CATEGORIES = gql`
   ${categories}
-`
+`;
 
 function Category(props) {
-  const { data: categoryData, loading, error } = useQuery(CATEGORIES)
+  const { data: categoryData, loading, error } = useQuery(CATEGORIES);
 
   return (
     <SafeAreaView style={[styles.flex, styles.safeAreaStyle]}>
@@ -32,7 +32,7 @@ function Category(props) {
             data={categoryData ? categoryData.categories : []}
             keyExtractor={(item, index) => index.toString()}
             showsVerticalScrollIndicator={false}
-            numColumns={2}
+            numColumns={4} // Change to 4 columns
             renderItem={({ item, index }) => (
               <CategoryCard
                 style={styles.spacer}
@@ -46,6 +46,7 @@ function Category(props) {
         <BottomTab screen="HOME" />
       </View>
     </SafeAreaView>
-  )
+  );
 }
-export default Category
+
+export default Category;

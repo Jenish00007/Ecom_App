@@ -1,17 +1,17 @@
-import React from 'react'
-import { View, FlatList, ImageBackground } from 'react-native'
-import SwiperFlatList from 'react-native-swiper-flatlist'
-import styles from './styles'
-import CategoryCard from '../../ui/CategoryCard/CategoryCard'
-import { BottomTab, TextDefault, TextError, Spinner } from '../../components'
-import { verticalScale, scale, colors } from '../../utils'
-import ProductCard from '../../ui/ProductCard/ProductCard'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { HeaderBackButton } from '@react-navigation/stack'
-import { MaterialIcons } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
-import { gql, useQuery } from '@apollo/client'
-import { categories, produccts } from '../../apollo/server'
+import React from 'react';
+import { View, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
+import SwiperFlatList from 'react-native-swiper-flatlist';
+import styles from './styles';
+import CategoryCard from '../../ui/CategoryCard/CategoryCard';
+import { BottomTab, TextDefault, TextError, Spinner } from '../../components';
+import { verticalScale, scale, colors, alignment } from '../../utils';
+import ProductCard from '../../ui/ProductCard/ProductCard';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { HeaderBackButton } from '@react-navigation/stack';
+import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { gql, useQuery } from '@apollo/client';
+import { categories, produccts } from '../../apollo/server';
 
 const caroselImage = [
   require('../../assets/images/MainLanding/banner-1.png'),
@@ -20,28 +20,21 @@ const caroselImage = [
   require('../../assets/images/MainLanding/banner-1.png'),
   require('../../assets/images/MainLanding/recommended_2.png'),
   require('../../assets/images/MainLanding/carosel_img_3.png')
-]
+];
 
 const CATEGORIES = gql`
   ${categories}
-`
+`;
 const PRODUCTS_DATA = gql`
   ${produccts}
-`
+`;
 
 function MainLanding(props) {
-  const navigation = useNavigation()
-  const { data: categoryData } = useQuery(CATEGORIES)
-  const {
-    data: productsData,
-    loading,
-    error,
-    refetch,
-    networkStatus
-  } = useQuery(PRODUCTS_DATA)
-  const Featured = productsData?.products
-    ? productsData.products.filter(item => item.featured)
-    : []
+  const navigation = useNavigation();
+  const { data: categoryData } = useQuery(CATEGORIES);
+  const { data: productsData, loading, error, refetch, networkStatus } = useQuery(PRODUCTS_DATA);
+
+  const Featured = productsData?.products ? productsData.products.filter(item => item.featured) : [];
 
   function renderCarosel() {
     return (
@@ -79,27 +72,45 @@ function MainLanding(props) {
           />
         </View>
       </View>
-    )
+    );
   }
 
   function renderHeader() {
     return (
       <>
         {renderCarosel()}
-        <View style={styles.categoryContainer}>
-          {categoryData &&
-            categoryData.categories.map((category, index) => {
-              return (
-                <CategoryCard
-                  style={styles.spacer}
-                  key={index}
-                  cardLabel={category.title}
-                  id={category._id}
-                  title={category.title}
-                />
-              )
-            })}
+        {/* Scrollable Category Row */}
+        <View style={styles.titleSpacer}>
+          <TextDefault textColor={colors.fontMainColor} H4 style={{ fontWeight: 'bold' }}>
+            {'Category'}
+          </TextDefault>
+          <View style={styles.seeAllTextContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate('Category')}>
+              <TextDefault style={styles.seeAllText}>See All</TextDefault>
+            </TouchableOpacity>
+          </View>
+          
+          {/* Horizontal Scrollable FlatList for Icon Containers */}
+          <FlatList
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item, index) => index.toString()}
+            data={categoryData ? categoryData.categories.slice(0, 8) : []} // Limit to 8 categories
+            renderItem={({ item, index }) => (
+              <View style={styles.iconContainer}>
+                {/* Inside each IconContainer, add a dummy image */}
+                <ImageBackground
+                  source={require('../../assets/dummy-image.png')} // Replace with your dummy image path
+                  style={styles.iconImage}>
+                  <TextDefault textColor={colors.fontMainColor} H4 style={{ fontWeight: 'bold' }}>
+                    {item.name} {/* Display category name */}
+                  </TextDefault>
+                </ImageBackground>
+              </View>
+            )}
+          />
         </View>
+
         {Featured.length > 0 && (
           <View style={styles.titleSpacer}>
             <TextDefault textColor={colors.fontMainColor} H4>
@@ -113,7 +124,7 @@ function MainLanding(props) {
               renderItem={({ item, index }) => {
                 return (
                   <ProductCard styles={styles.itemCardContainer} {...item} />
-                )
+                );
               }}
             />
           </View>
@@ -124,7 +135,7 @@ function MainLanding(props) {
           </TextDefault>
         </View>
       </>
-    )
+    );
   }
 
   return (
@@ -150,6 +161,6 @@ function MainLanding(props) {
         <BottomTab screen="HOME" />
       </View>
     </SafeAreaView>
-  )
+  );
 }
-export default MainLanding
+export default MainLanding;
