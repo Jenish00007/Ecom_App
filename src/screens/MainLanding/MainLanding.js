@@ -12,14 +12,15 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { gql, useQuery } from '@apollo/client';
 import { categories, produccts } from '../../apollo/server';
+import { TextInput } from 'react-native'; // Add this to your imports
 
 const caroselImage = [
-  require('../../assets/images/MainLanding/banner-1.png'),
-  require('../../assets/images/MainLanding/recommended_2.png'),
-  require('../../assets/images/MainLanding/carosel_img_3.png'),
-  require('../../assets/images/MainLanding/banner-1.png'),
-  require('../../assets/images/MainLanding/recommended_2.png'),
-  require('../../assets/images/MainLanding/carosel_img_3.png')
+  require('../../assets/images/MainLanding/slide1.jpg'),
+  require('../../assets/images/MainLanding/slide2.jpg'),
+  require('../../assets/images/MainLanding/slide3.jpg'),
+  require('../../assets/images/MainLanding/slide4.jpg'),
+  require('../../assets/images/MainLanding/slide5.jpg'),
+  require('../../assets/images/MainLanding/slide6.jpg')
 ];
 
 const CATEGORIES = gql`
@@ -37,6 +38,7 @@ function MainLanding(props) {
   const Featured = productsData?.products ? productsData.products.filter(item => item.featured) : [];
 
   function renderCarosel() {
+    console.log(caroselImage); // Add this line to check the array content
     return (
       <View style={styles.caroselContainer}>
         <SwiperFlatList
@@ -46,8 +48,9 @@ function MainLanding(props) {
           autoplay
           autoplayDelay={3}
           autoplayLoop={true}
-          paginationActiveColor="#fff"
-          paginationStyle={{ marginBottom: '7%' }}
+          paginationActiveColor='#008000'
+          paginationDefaultColor="#C0D8F0" // Non-active dot color
+          paginationStyle={{ marginBottom: '1%' }}
           paginationStyleItem={{
             height: verticalScale(8),
             width: verticalScale(8),
@@ -57,7 +60,7 @@ function MainLanding(props) {
             <ImageBackground source={item} style={styles.caroselStyle} />
           )}
         />
-        <View style={styles.menuDrawerContainer}>
+        {/* <View style={styles.menuDrawerContainer}>
           <HeaderBackButton
             labelVisible={false}
             backImage={() => (
@@ -70,7 +73,7 @@ function MainLanding(props) {
             )}
             onPress={() => navigation.toggleDrawer()}
           />
-        </View>
+        </View> */}
       </View>
     );
   }
@@ -78,6 +81,53 @@ function MainLanding(props) {
   function renderHeader() {
     return (
       <>
+      {/* Location and Notifications Row */}
+      <View style={styles.headerContainer}>
+        {/* Column Layout for Location */}
+        <View style={styles.locationWrapper}>
+          {/* Add "Location" Text Above */}
+          <TextDefault style={styles.locationLabel}>Location</TextDefault>
+
+          {/* Location Row */}
+          <View style={styles.locationContainer}>
+            <MaterialIcons name="location-on" size={24} color="#01AC66" />
+            <TextDefault style={styles.locationText}>New York, USA</TextDefault>
+            <TouchableOpacity>
+              <MaterialIcons name="keyboard-arrow-down" size={20} color="#000" />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Notifications Icon */}
+        <TouchableOpacity
+          onPress={() => alert('Notifications clicked')}
+          style={styles.notificationIconWrapper}
+        >
+          <MaterialIcons
+            name="notifications-none"
+            size={28}
+            color="#000"
+            style={styles.notificationIcon}
+          />
+        </TouchableOpacity>
+      </View>
+
+{/* Search Bar */}
+<View style={styles.searchContainer}>
+          <MaterialIcons name="search" size={24} color="#A0A0A0" />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search Food, Drinks, etc"
+            placeholderTextColor="#A0A0A0"
+          />
+          <TouchableOpacity>
+            <MaterialIcons name="tune" size={24} color="#008000" />
+          </TouchableOpacity>
+        </View>
+
+
+
+
         {renderCarosel()}
         {/* Scrollable Category Row */}
         <View style={styles.titleSpacer}>

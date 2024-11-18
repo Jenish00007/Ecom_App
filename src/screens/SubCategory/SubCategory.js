@@ -15,6 +15,8 @@ import { subCategories } from '../../apollo/server'
 import { colors } from '../../utils'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import SubCategoryCard from '../../ui/SubCategoryCard/SubCategoryCard'
+import { scale } from '../../utils/scaling'; // Adjust the path if necessary
+
 
 const SUB_CATEGORIES = gql`
   ${subCategories}
@@ -73,23 +75,29 @@ function SubCategory(props) {
           <Spinner />
         ) : (
           <FlatList
-            style={styles.flex}
-            contentContainerStyle={styles.categoryContainer}
-            data={categoryData ? categoryData.subCategoriesById : []}
-            keyExtractor={(item, index) => index.toString()}
-            showsVerticalScrollIndicator={false}
-            ListEmptyComponent={emptyView()}
-            refreshing={networkStatus === 4}
-            onRefresh={() => refetch()}
-            numColumns={2}
-            renderItem={({ item, index }) => (
-              <SubCategoryCard
-                style={styles.cardStyle}
-                key={index}
-                data={item}
-              />
-            )}
-          />
+  style={styles.flex}
+  contentContainerStyle={styles.categoryContainer}
+  data={categoryData ? categoryData.subCategoriesById : []}
+  keyExtractor={(item, index) => index.toString()}
+  showsVerticalScrollIndicator={false}
+  ListEmptyComponent={emptyView()}
+  refreshing={networkStatus === 4}
+  onRefresh={() => refetch()}
+  numColumns={2} // Ensures two items per row
+  renderItem={({ item, index }) => (
+    <SubCategoryCard
+      style={[
+        styles.cardStyle,
+        index >= 2 ? { marginTop: scale(30) } : null, // Add extra margin for items in the second row and beyond
+      ]}
+      key={index}
+      data={item}
+    />
+  )}
+/>
+
+
+
         )}
         <BottomTab screen="HOME" />
       </View>

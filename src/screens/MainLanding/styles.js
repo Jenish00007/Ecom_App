@@ -24,16 +24,94 @@ const styles = StyleSheet.create({
     backgroundColor: colors.themeBackground
   },
   grayBackground: {
-    backgroundColor: colors.backgroudGray
+    backgroundColor: colors.white
   },
   caroselContainer: {
     width: '100%',
     height: height * 0.3,
-    position: 'relative'
+    position: 'relative',
+    padding: 20,
+    borderRadius: scale(70), // Increase borderRadius here
+    overflow: 'hidden', // Ensure content respects rounded corners
+    marginTop: verticalScale(15),
+    marginBottom: verticalScale(-16),
+    alignItems: 'center',
+    
   },
   caroselStyle: {
     width,
-    height: height * 0.3
+    height: height * 0.3,
+    borderRadius: scale(70), // Increase borderRadius here
+  },
+  headerContainer: {
+    flexDirection: 'row', // Keeps the notification button and location at the same horizontal level
+    justifyContent: 'space-between', // Ensures proper spacing
+    alignItems: 'flex-start', // Aligns items to the top
+    paddingHorizontal: scale(15),
+    paddingVertical: verticalScale(10),
+  },
+  locationWrapper: {
+    alignItems: 'flex-start', // Ensures everything aligns left
+  },
+  
+  locationContainer: {
+    flexDirection: 'row', // Ensures the icon, text, and arrow stay row-wise
+    alignItems: 'center', // Vertically aligns items in the row
+  },
+  notificationIconWrapper: {
+    justifyContent: 'flex-end', // Positions the icon on the far right
+    alignItems: 'flex-start', // Aligns vertically with the rest of the content
+  },
+  locationText: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#00000',
+    marginLeft: scale(5),
+    marginRight: scale(5),
+  },
+  
+  notificationIcon: {
+    marginLeft: scale(5),
+    padding: scale(10)
+  },
+  locationLabel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#808080',
+    marginBottom: verticalScale(5), // Space between "Location" and the container
+    padding: scale(7)
+  },
+  locationRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginTop: scale(15),
+    marginLeft: scale(0)
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF', // White background
+    borderRadius: scale(10),
+    marginHorizontal: scale(20),
+    marginTop: verticalScale(10),
+    padding: scale(13),
+    // Shadow for iOS
+    shadowColor: '#808080', // Gray shadow color
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    // Shadow for Android
+    elevation: 5, // Adjust elevation for the desired shadow effect
+  },  
+  
+  searchInput: {
+    flex: 1,
+    marginLeft: scale(10),
+    color: '#000',
+    fontSize: 18,
   },
   menuDrawerContainer: {
     position: 'absolute',
@@ -66,7 +144,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: scale(40),
     overflow: 'hidden',
-    backgroundColor: '#E6F7F0',  // Replace this with your desired color code
+    backgroundColor: '#E0F8FF',  // Replace this with your desired color code
     marginTop: scale(16)
   },  
   iconImage: {
