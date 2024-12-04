@@ -35,7 +35,6 @@ function ShoppingCart(props) {
     removeQuantity
   } = useContext(UserContext)
   const [products, setProducts] = useState([])
-  // const setLoadingData = useState(true)[1]
 
   useEffect(() => {
     didFocus()
@@ -71,15 +70,9 @@ function ShoppingCart(props) {
         if (isFocused) {
           await updateCart(transformCart.filter(item => item))
           setProducts(productByIds)
-          // setLoadingData(false)
-        } else {
-          if (navigation.isFocused) {
-            // setLoadingData(false)
-          }
         }
       }
     } catch (error) {
-      // setLoadingData(false)
       return <TextError text={error.message} />
     }
   }
@@ -92,16 +85,11 @@ function ShoppingCart(props) {
         const attribute = product.attributes.find(
           data => data.attributeId === item.attributeId
         )
-
         if (!attribute) stockCheck = false
         const option = attribute.options.find(
           op => op.optionId === item.option.optionId
         )
-        if (!option) stockCheck = false
-        if (!option.stock) stockCheck = false
-        if (option.stock > cartData.quantity) {
-          stockCheck = true
-        } else {
+        if (!option || !option.stock || option.stock < cartData.quantity) {
           stockCheck = false
         }
       })
@@ -129,7 +117,8 @@ function ShoppingCart(props) {
         <View style={styles.imageContainer}>
           <Image
             style={styles.image}
-            source={require('../../assets/images/activeOrder.png')}></Image>
+            source={require('../../assets/images/activeOrder.png')}
+          ></Image>
         </View>
         <View style={styles.descriptionEmpty}>
           <TextDefault textColor={colors.fontSecondColor} bold center>
@@ -159,42 +148,55 @@ function ShoppingCart(props) {
   }
 
   function PriceContainer() {
+    const subTotal = parseFloat(calculatePrice(0))
+    const deliveryFee = parseFloat(configuration.deliveryCharges)
+    const discountRate = 0.1 // 10% discount
+    const discount = subTotal >= 500 ? subTotal * discountRate : 0 // Discount logic
+
+    const totalCost = (subTotal + deliveryFee - discount).toFixed(2)
+
     return (
       <View style={styles.priceBox}>
         <View style={styles.summaryContainer}>
           <View style={styles.rowContainer}>
-            <Text style={styles.textStyle}>Sub Total</Text>
+            <Text style={styles.textStyle}>Sub - Total</Text>
             <Text style={styles.textStyle}>
-              {configuration.currencySymbol} {calculatePrice(0)}
+              {configuration.currencySymbol} {subTotal.toFixed(2)}
             </Text>
           </View>
           <View style={styles.spacer} />
           <View style={styles.rowContainer}>
-            <Text style={styles.textStyle}>Delivery</Text>
+            <Text style={styles.textStyle}>Delivery Fee</Text>
             <Text style={styles.textStyle}>
-              {configuration.currencySymbol}{' '}
-              {parseFloat(configuration.deliveryCharges).toFixed(2)}
+              {configuration.currencySymbol} {deliveryFee.toFixed(2)}
+            </Text>
+          </View>
+          <View style={styles.spacer} />
+          <View style={styles.rowContainer}>
+            <Text style={styles.textStyle}>Discount</Text>
+            <Text style={[styles.textStyle, styles.discountStyle]}>
+              -{configuration.currencySymbol} {discount.toFixed(2)}
             </Text>
           </View>
           <View style={styles.spacer} />
           <View style={styles.lineStyle} />
           <View style={styles.spacer} />
           <View style={styles.rowContainer}>
-            <Text style={styles.textStyle}>Total</Text>
+            <Text style={styles.textStyle}>Total Cost</Text>
             <Text style={[styles.textStyle, styles.totalStyle]}>
-              {configuration.currencySymbol}{' '}
-              {calculatePrice(configuration.deliveryCharges)}
+              {configuration.currencySymbol} {totalCost}
             </Text>
           </View>
           <View style={styles.spacer} />
           <BlueBtn
             onPress={() => navigation.navigate('Checkout')}
-            text="Proceed"
+            text="Proceed to Checkout"
           />
         </View>
       </View>
     )
   }
+
   return (
     <SafeAreaView style={[styles.flex, styles.safeAreaStyle]}>
       <View style={[styles.flex, styles.mainContainer]}>
@@ -207,18 +209,14 @@ function ShoppingCart(props) {
             ListEmptyComponent={empty()}
             contentContainerStyle={styles.subContainer}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item, index }) => (
+            renderItem={({ item }) => (
               <ShoppingCard
                 key={item.key}
                 item={item}
                 quantity={item.quantity}
                 price={(parseFloat(item.price) * item.quantity).toFixed(2)}
-                addQuantity={() => {
-                  addQuantity(item.key)
-                }}
-                removeQuantity={() => {
-                  removeQuantity(item.key)
-                }}
+                addQuantity={() => addQuantity(item.key)}
+                removeQuantity={() => removeQuantity(item.key)}
               />
             )}
           />
@@ -229,4 +227,5 @@ function ShoppingCart(props) {
     </SafeAreaView>
   )
 }
+
 export default ShoppingCart

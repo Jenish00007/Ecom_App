@@ -44,6 +44,34 @@ function ProductCard(props) {
           resizeMode="cover"
           style={styles.imgResponsive}
         />
+        <View style={styles.offerContainer}>
+    <TextDefault textColor={colors.white} style={styles.offerText}bold small>35% OFF</TextDefault>
+  </View>
+        <View style={styles.likeContainer}>
+    <TouchableOpacity
+      disabled={loadingMutation}
+      activeOpacity={0}
+      onPress={() => {
+        if (isLoggedIn) {
+          mutate({
+            variables: {
+              productId: props._id
+            }
+          });
+          setLiked((prev) => !prev);
+        } else {
+          navigation.navigate('SignIn');
+        }
+      }}
+    >
+      <Ionicons
+        name={liked ? 'ios-heart-sharp' : 'ios-heart-outline'}
+        size={scale(20)}
+        color='#01AC66'
+    
+      />
+    </TouchableOpacity>
+  </View>
       </View>
       <View style={styles.botCardContainer}>
         <View style={styles.botSubCardContainer}>
@@ -60,20 +88,20 @@ function ProductCard(props) {
                 {props.subCategory.title}
               </TextDefault>
               <View style={styles.ratingContainer}>
-                <View style={{ alignSelf: 'center', height: '80%' }}>
+                {/* <View style={{ alignSelf: 'center', height: '80%' }}>
                   <Ionicons name="md-star" size={scale(11)} color="#4165b9" />
-                </View>
-                <TextDefault
+                </View> */}
+                {/* <TextDefault
                   textColor={colors.fontSecondColor}
                   style={{ marginLeft: 2 }}>
                   {props.reviewData.ratings}
-                </TextDefault>
-                <TextDefault
+                </TextDefault> */}
+                {/* <TextDefault
                   textColor={colors.fontSecondColor}
                   style={{ marginLeft: 2 }}
                   small>
                   {`( ${props.reviewData.total} )`}
-                </TextDefault>
+                </TextDefault> */}
               </View>
             </View>
           </View>
@@ -81,11 +109,11 @@ function ProductCard(props) {
             <TextDefault
               style={{ maxWidth: '75%' }}
               numberOfLines={1}
-              textColor={colors.fontBlue}>
+              textColor={colors.greenColor}>
               ${props.price.toFixed(2)}
             </TextDefault>
             <View style={[styles.aboutRestaurant]}>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 disabled={loadingMutation}
                 activeOpacity={0}
                 onPress={() => {
@@ -105,7 +133,7 @@ function ProductCard(props) {
                   name={liked ? 'ios-heart-sharp' : 'ios-heart-outline'}
                   size={scale(18)}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </View>
         </View>

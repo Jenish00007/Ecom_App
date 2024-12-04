@@ -2,7 +2,7 @@ import { verticalScale, scale, colors, fontStyles } from '../../utils'
 
 const mainBtnStyles = {
   backgroundColor: {
-    backgroundColor: colors.brownColor,
+    backgroundColor: colors.greenColor,
     height: scale(50),
     borderRadius: scale(4)
   },
@@ -43,9 +43,9 @@ const alternateBtn = {
 
 const blueBtn = {
   backgroundColor: {
-    backgroundColor: colors.buttonBackground,
+    backgroundColor: colors.greenColor,
     height: verticalScale(46),
-    borderRadius: verticalScale(3)
+    borderRadius: verticalScale(4)
   },
   main_blue_btn: {
     alignItems: 'center',

@@ -3,135 +3,91 @@ import { alignment, colors, scale, verticalScale } from '../../utils'
 const { height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
-  flex: {
-    flex: 1
-  },
-  safeAreaStyle: {
-    backgroundColor: colors.headerbackground
-  },
   container: {
-    height: height * 0.92,
-    width: '100%',
-    alignSelf: 'center',
-    justifyContent: 'space-between'
+    flex: 1,
+    backgroundColor: '#ffffff',
+    paddingHorizontal: 20
   },
-  body: {
-    height: '100%',
-    width: '95%',
-    alignSelf: 'center'
-  },
-  bodyHeader: {
-    height: '8%',
-    width: '90%',
-    flexDirection: 'row',
-    alignSelf: 'center',
-    alignItems: 'center'
-  },
-  headerText: {
-    ...alignment.PLsmall
-  },
-  bodyContainer: {
-    width: '90%',
-    height: '70%',
-    alignSelf: 'center',
-    backgroundColor: colors.themeBackground,
-    borderRadius: scale(5)
-  },
-  bodyContainerBackground: {
-    backgroundColor: colors.themeBackground,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%'
-  },
-  bodyFooter: {
-    width: '90%',
-    height: '25%',
-    alignSelf: 'center',
+  scrollViewContent: {
+    flexGrow: 1,
     justifyContent: 'center'
   },
-  footer: {
-    height: '55%',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    borderRadius: verticalScale(5),
-    backgroundColor: colors.lightBrown,
-    ...alignment.PLmedium
-  },
-  bcTexts: {
-    width: '100%',
+  logoContainer: {
     alignItems: 'center',
-    justifyContent: 'center',
-    height: '20%'
+    marginBottom: 30
   },
-  bcMain: {
-    height: '45%',
-    width: '90%',
-    flexDirection: 'column',
-    justifyContent: 'space-around'
+  heading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20
   },
-  bcInputs: {
-    width: '90%'
+  subHeading: {
+    fontSize: 16,
+    color: '#666'
   },
-  bcSocialBox: {
-    width: '90%',
-    height: '35%',
-    alignItems: 'center',
-    justifyContent: 'center'
+  formContainer: {
+    marginBottom: 20
   },
-  bcSocialBtns: {
-    flexDirection: 'row'
+  input: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 10
   },
-  socialBtnsView: {
-    width: '100%'
+  errorInput: {
+    borderColor: 'red'
   },
-  socialBtn: {
+  errorText: {
+    color: 'red',
+    marginBottom: 10
+  },
+  forgotPasswordLink: {
+    alignItems: 'flex-end',
+    marginBottom: 20,
+  },
+  forgotPasswordText: {
+    textDecorationLine: 'underline',
+    textDecorationColor: 'green',
+    
+  },
+  socialContainer: {
     flexDirection: 'row',
-    height: '100%',
-    width: '100%',
     justifyContent: 'center',
-    alignItems: 'center'
+    marginVertical: 20
   },
-  bgCircle: {
-    justifyContent: 'center',
+  socialButton: {
+    marginHorizontal: 10
+  },
+  socialIcon: {
+    width: 40,
+    height: 40
+  },
+  appleButton: {
+    height: 40,
+    width: 120
+  },
+  signUpLink: {
     alignItems: 'center',
-    width: scale(30),
-    height: scale(30),
-    backgroundColor: colors.container,
-    borderRadius: scale(15),
-    ...alignment.PxSmall
+    marginTop: 20
   },
-  googleBtn: {
-    height: scale(50),
-    borderWidth: 0,
-    borderRightWidth: 0,
-    borderRadius: 3,
-    borderColor: 'orange',
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 0,
-    backgroundColor: colors.google
+  signUpAction: {
+    textDecorationLine: 'underline',
+    textDecorationColor: 'green',
+    
   },
-  fbText: {
-    ...alignment.PLmedium
+  label: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 5
   },
-  ftUnderline: {
-    textDecorationLine: 'underline'
+  orText: {
+    fontSize: 14,
+    color: '#6C757D',
+    marginBottom: -5,
+    textAlign: 'center', // Centers the text
+    marginTop: 60
   },
-  LoginBtn: {
-    backgroundColor: colors.buttonBackground,
-    height: scale(40),
-    borderRadius: scale(3)
-  },
-  main_brown_btn: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%'
-  },
-  appleBtn: {
-    width: '100%',
-    height: scale(50),
-    ...alignment.MTsmall
-  }
+  
 })
 export default styles

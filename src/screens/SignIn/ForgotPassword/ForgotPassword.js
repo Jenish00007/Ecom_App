@@ -58,7 +58,7 @@ function ForgotPassword(props) {
       <TouchableOpacity
         disabled={loading}
         activeOpacity={1}
-        style={[styles.btnContainer, styles.brownColor]}
+        style={[styles.btnContainer]}
         onPress={event => {
           if (validateCredentials()) {
             mutate({ variables: { email: email.toLowerCase().trim() } })
@@ -89,6 +89,7 @@ function ForgotPassword(props) {
             </Text>
           </View>
           <View style={styles.inputContainer}>
+            
             <TextField
               error={emailError}
               placeholder="Your Email"

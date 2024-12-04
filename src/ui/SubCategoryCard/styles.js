@@ -1,31 +1,43 @@
-import { StyleSheet } from 'react-native'
-import { colors, alignment } from '../../utils'
+import { StyleSheet } from 'react-native';
+import { colors, alignment } from '../../utils';
 
 const styles = StyleSheet.create({
+  // wrapper: {
+  //   alignItems: 'center', // Center the card and text together
+  //   marginBottom: 20, // Vertical spacing between cards
+  //   width: '100%',
+  // },
   container: {
     width: '100%',
     height: '100%',
-    backgroundColor: colors.container,
+    backgroundColor: colors.grayLinesColor,
     justifyContent: 'center',
     alignItems: 'center',
-    ...alignment.PxSmall
+    ...alignment.PxSmall,
+    borderRadius: 10 ,
+    marginBottom: 50
+   
   },
   cardImageContainer: {
-    width: '100%',
-    height: '100%',
-    position: 'relative'
+    width: '90%',
+    height: '90%',
+    // aspectRatio: 1.5, // Maintain consistent card size
+    borderRadius: 10,
+    overflow: 'hidden',
   },
   imgResponsive: {
     flex: 1,
-    justifyContent: 'center',
-    width: undefined,
-    height: undefined
+    width: '100%',
+    height: '100%',
   },
   cardText: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.4)'
-  }
-})
-export default styles
+    marginTop: -8, // Space between card and text
+    marginBottom: 13,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    width: '90%', // Match text width to card width
+    marginLeft: -50,
+  },
+});
+
+export default styles;

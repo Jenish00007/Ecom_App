@@ -1,127 +1,72 @@
-import { verticalScale, scale } from '../../../utils/scaling'
-import { fontStyles } from '../../../utils/fontStyles'
-import { StyleSheet } from 'react-native'
-import { alignment } from '../../../utils'
+import { StyleSheet } from 'react-native';
+import { verticalScale, scale } from '../../../utils/scaling';
+import { fontStyles } from '../../../utils/fontStyles';
 
 const styles = StyleSheet.create({
-  flex: {
-    flex: 1
+  container: {
+    flexGrow: 1,
+    backgroundColor: '#fff',
+    padding: verticalScale(16),
   },
-  profileContainer: {
-    width: '100%',
-    height: '50%',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  profileSubContainer: {
-    width: '90%',
-    height: '90%'
-  },
-  topProfileContent: {
-    width: '100%',
-    height: '10%',
+  header: {
     flexDirection: 'row',
-    ...alignment.MBxSmall
-  },
-  topProfileIconContainer: {
     alignItems: 'center',
-    justifyContent: 'center'
+    marginBottom: verticalScale(20),
   },
-  topProfileTextContainer: {
-    justifyContent: 'center',
-    width: '50%',
-    ...alignment.MLxSmall
+  backButton: {
+    marginRight: scale(10),
   },
-  topProfileTextStyle: {
-    fontFamily: fontStyles.PoppinsRegular,
-    fontSize: verticalScale(16)
+  headerTitle: {
+    fontFamily: fontStyles.PoppinsSemiBold,
+    fontSize: verticalScale(18),
+    color: '#000',
+    marginLeft: 115,
   },
-  imgResponsive: {
-    flex: 1,
-    width: undefined,
-    height: undefined
-  },
-  imgResponsive3: {
-    flex: 1,
-    width: undefined,
-    height: undefined,
-    backgroundColor: '#F7F7F7'
-  },
-  profieCenterContainer: {
-    width: '100%',
-    height: '90%',
-    borderRadius: verticalScale(8)
-  },
-  profileCenterContainerTop: {
-    width: '100%',
-    height: '15%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  iconContainer: {
-    width: '15%',
-    height: '100%',
+  profileSection: {
     alignItems: 'center',
-    justifyContent: 'center'
-  },
-  profileImageContainer: {
-    width: '100%',
-    height: '40%',
-    justifyContent: 'center',
-    alignItems: 'center'
+    marginBottom: verticalScale(30),
   },
   profileImage: {
     width: verticalScale(100),
     height: verticalScale(100),
     borderRadius: verticalScale(50),
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: verticalScale(3),
-    borderColor: '#DDDDDD'
+    borderWidth: 5,
+    borderColor: '#01AC66',
   },
-  imgResponsive2: {
-    width: '70%',
-    height: '70%'
+  editIcon: {
+    position: 'absolute', // Keep it absolute for overlay
+    bottom: verticalScale(40), // Align it with the bottom of the profile image
+    right: verticalScale(100), // Align it to the right of the profile image
+    backgroundColor: '#01AC66',
+    borderRadius: verticalScale(20), // Circular shape
+    padding: scale(5),
   },
-  nameContainer: {
-    width: '100%',
-    height: '20%',
-    alignItems: 'center',
-    justifyContent: 'center'
+  profileName: {
+    fontFamily: fontStyles.PoppinsSemiBold,
+    fontSize: verticalScale(20),
+    marginTop: verticalScale(10),
+    color: '#000',
   },
-  nameStyle: {
-    fontFamily: fontStyles.PoppinsRegular,
-    fontSize: verticalScale(16)
+  settingsSection: {
+    marginTop: verticalScale(-2),
   },
-  placeContainer: {
-    width: '100%',
-    height: '8%',
-    alignItems: 'center'
-  },
-  placeStyle: {
-    fontFamily: fontStyles.PoppinsRegular,
-    fontSize: verticalScale(12)
-  },
-  addressContainer: {
+  settingsItem: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    ...alignment.PLsmall,
-    ...alignment.PRsmall
+    alignItems: 'center',
+    paddingVertical: verticalScale(12),
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
   },
-  iconsStyle: {
-    width: scale(20),
-    height: scale(20),
-    marginBottom: scale(4)
+  settingsItemIcon: {
+    marginRight: scale(15),
   },
-  addressIcon: {
-    width: '15%',
-    height: '50%'
-  },
-  addressText: {
+  settingsItemText: {
+    flex: 1,
     fontFamily: fontStyles.PoppinsRegular,
-    fontSize: verticalScale(12)
-  }
-})
-export default styles
+    fontSize: verticalScale(16),
+    color: '#000',
+  },
+ 
+});
+
+export default styles;

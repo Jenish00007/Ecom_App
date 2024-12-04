@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native'
 import { alignment, fontStyles, colors, scale } from '../../utils'
+import color from '../../components/Text/TextDefault/styles'
 const { height, width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.headerbackground
   },
   mainContainer: {
-    backgroundColor: colors.themeBackground
+    backgroundColor: colors.darkGrayText
   },
   contentStyle: {
     flexGrow: 1
@@ -42,23 +43,29 @@ const styles = StyleSheet.create({
   caroselTitleContainer: {
     width: '70%',
     height: '100%',
-    justifyContent: 'center'
-  },
-  caroselPriceContainer: {
-    width: '30%',
-    height: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
-    ...alignment.PxSmall
+    marginLeft: '5%',
+    fontWeight: 'bold'
   },
+  // caroselPriceContainer: {
+  //   width: '30%',
+  //   height: '100%',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   ...alignment.PxSmall,
+    
+  // },
   caroselPriceSubContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginLeft: '3%',
+    fontWeight: 'bold',
     ...alignment.Psmall,
-    backgroundColor: colors.grayLinesColor
+    marginTop: -30
+    
+   
   },
   mainScrollViewContainer: {
-    backgroundColor: colors.themeBackground
+    backgroundColor: colors.white
+
   },
   textStyle: {
     fontFamily: fontStyles.PoppinsRegular,
@@ -73,7 +80,8 @@ const styles = StyleSheet.create({
   caroselMainImgCnt: {
     height: height * 0.5,
     width: '100%',
-    backgroundColor: 'white'
+    backgroundColor: colors.grayLinesColor,
+    marginTop: -100
   },
   scrollViewStyle: {
     height: height * 0.08
@@ -122,11 +130,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%'
   },
-  ratingContainer: {
+  ratingStarsContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
     alignItems: 'center',
-    width: '25%'
+    marginTop: scale(-12), // Adjust spacing
+    marginLeft: '5%',
+  },  
+  ratingText:{
+    marginLeft: 5,
   },
   dateReview: {
     width: '100%',
@@ -136,7 +147,8 @@ const styles = StyleSheet.create({
   },
   reviewHeader: {
     alignSelf: 'center',
-    width: '90%'
+    width: '90%',
+    marginTop: scale(-17), // Adjust spacing
   },
   // modal
   crossBtn: {
@@ -149,6 +161,45 @@ const styles = StyleSheet.create({
     top: scale(20),
     right: scale(10),
     ...alignment.MTlarge
+  },
+  kgSelectorContainer: {
+    position: 'absolute', // Makes it relative to caroselContainer
+    bottom: scale(130), // Adjust distance from the bottom
+    right: scale(10), // Adjust distance from the right
+    padding: scale(10), // Add some padding
+    borderRadius: scale(5), // Optional: rounded corners
+    
+  },
+  kgSelectorButtons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: scale(10),
+  },
+  kgButton: {
+    padding: scale(5),
+    borderRadius: scale(5),
+  },
+  kgCount: {
+    marginHorizontal: scale(10),
+  },
+  likeContainer: {
+    position: 'absolute',
+    top: scale(10), // Adjust for spacing from the top
+    right: scale(0), // Adjust for spacing from the right
+    zIndex: 20, // Ensure it appears above other content
+    backgroundColor: colors.white, // Optional: Add a background
+    borderRadius: scale(15), // Optional: Round the background
+    padding: scale(5), // Optional: Add padding for touch area
+    shadowColor: colors.grayLinesColor,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5, // For Android shadow
   }
+  
+  
+  
+  
 })
 export default styles

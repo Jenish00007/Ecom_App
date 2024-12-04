@@ -1,100 +1,164 @@
-import { Dimensions, StyleSheet } from 'react-native'
-import { colors, alignment, verticalScale, scale } from '../../utils'
-const { height } = Dimensions.get('window')
+import { StyleSheet, Dimensions } from 'react-native';
+import { colors, scale } from '../../utils';
 
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1
-  },
-  safeAreaStyle: {
-    backgroundColor: colors.headerbackground
-  },
-  formMainContainer: {
+const { height } = Dimensions.get('window');
+
+export default StyleSheet.create({
+  container: {
     flex: 1,
-    height: height * 0.8,
-    backgroundColor: colors.themeBackground,
-    alignItems: 'center'
+    backgroundColor: '#ffffff',
   },
-  formContainer: {
-    marginTop: height * 0.1,
-    width: '90%',
-    backgroundColor: colors.container,
-    borderRadius: scale(8),
-    position: 'relative',
-    ...alignment.PBlarge
+  scrollContent: {
+    padding: 20,
+    alignItems: 'center',
+  },
+  header: {
+    marginBottom: 30,
+    alignItems: 'center',
+  },
+  backButton: {
+    position: 'absolute',
+    left: 0,
+    top: 10,
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#000',
+    marginTop: scale(70),
+  },
+  headerSubtitle: {
+    fontSize: 18,
+    color: '#777',
+    textAlign: 'center',
+    marginTop: 10,
+    marginTop: scale(0),
   },
   profileImageContainer: {
-    width: verticalScale(80),
-    height: verticalScale(80),
+    marginBottom: 30,
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 100, // Set fixed width and height for the circle
+    height: 100,
+    borderRadius: 50, // Makes it circular
+    backgroundColor: '#f0f0f0', // Light gray background
+    shadowColor: '#000', // Shadow color
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset
+    shadowOpacity: 0.2, // Shadow opacity
+    shadowRadius: 4, // Shadow blur
+    elevation: 5, // Adds shadow for Android
+  },
+  
+  profileImage: {
+    fontSize: 64, // Font size for the icon
+    color: colors.darkGrayText, // Gray color for the user icon
+  },
+  
+  editIcon: {
     position: 'absolute',
-    alignSelf: 'center',
-    backgroundColor: colors.container,
-    borderRadius: verticalScale(40),
-    top: verticalScale(-40),
-    borderWidth: verticalScale(3),
-    borderColor: '#DDDDDD',
-    justifyContent: 'center',
-    alignItems: 'center'
+    bottom: -5,
+    right: -7,
+    backgroundColor: '#4CAF50',
+    borderRadius: 20,
+    padding: 5,
   },
-  formContentContainer: {
+  formContainer: {
     width: '100%',
-    marginTop: scale(50),
-    alignItems: 'center',
-    ...alignment.MBmedium,
-    ...alignment.PLsmall,
-    ...alignment.PRsmall
+    marginBottom: 20,
   },
-  twoItemsContainer: {
+  label: {
+    fontSize: 14,
+    color: colors.black,
+    marginBottom: 8,
+    marginLeft: 5,
+    fontWeight: 'bold',
+  },
+  input: {
     width: '100%',
-    height: scale(80),
+    padding: 12,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    marginBottom: 20,
+    height: scale(40),
+  },
+  phoneContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
-    ...alignment.MBxSmall
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    marginBottom: 20,
+    height: scale(40),
   },
-  halfContainer: {
-    width: '45%',
-    height: '80%'
+  countryCode: {
+    paddingHorizontal: 12,
+    borderRightWidth: 1,
+    borderRightColor: '#ccc',
+    fontSize: 14,
+    color: '#777',
   },
-  labelContainer: {
-    width: '100%',
-    height: '40%'
+  phoneInput: {
+    flex: 1,
+    paddingHorizontal: 12,
+    fontSize: 14,
+    color: '#000',
   },
-  inputContainer: {
-    width: '100%',
-    height: '60%',
-    borderRadius: scale(3),
+  dropdownText: {
+    fontSize: 14,
+    color: '#777',
+  },
+  mainButton: {
+    backgroundColor: '#01AC66', // Customize the button color
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.themeBackground,
-    ...alignment.PxSmall
-  },
-  inputText: {
-    textAlign: 'left',
-    ...alignment.PxSmall
-  },
-  disableInput: {
-    textAlign: 'left',
-    color: colors.fontThirdColor,
-    ...alignment.PxSmall
-  },
-  oneItemContainer: {
+    marginTop: 20,
+    height: scale(45),
     width: '100%',
-    height: scale(80),
+  },
+  mainButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#FFFFFF', // White text
+  },
+  dropdownList: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 4,
+    backgroundColor: '#fff',
+    marginTop: 5,
+    position: 'absolute',
+    width: '100%',
+    zIndex: 10, // To ensure it appears above other content
+    elevation: 5, // For Android shadow effect
+  },
+  dropdownItem: {
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  dropdownItemText: {
+    fontSize: 16,
+    color: '#00000',
+  },
+  dropdown: {
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 4,
+    padding: 10,
+    marginBottom: 15,
+    backgroundColor: '#fff',
+    height: scale(40),
   },
-  fullContainer: {
-    width: '95%',
-    height: '80%'
-  },
-  addContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  error: {
-    borderWidth: scale(1),
-    borderColor: colors.errorColor,
-    borderRadius: scale(3)
-  }
-})
-export default styles
+  
+  
+  
+});

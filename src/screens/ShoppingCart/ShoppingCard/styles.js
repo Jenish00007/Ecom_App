@@ -17,21 +17,32 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     flexDirection: 'row',
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.horizontalLine,
+    borderRadius: scale(5), // Keep the border radius for rounded corners
     backgroundColor: colors.container,
-    borderRadius: scale(5),
     overflow: 'hidden',
-    ...alignment.PRsmall
+    ...alignment.PRsmall,
+  
+    // Shadow for iOS
+    shadowColor: 'darkgray',  // Color of the shadow
+    shadowOffset: { width: 0, height: 4 },  // Shadow offset (horizontal, vertical)
+    shadowOpacity: 0.5,  // Opacity of the shadow
+    shadowRadius: scale(5),  // Spread/blur radius for the shadow
+  
+    // Elevation for Android (since Android uses elevation instead of shadow properties)
+    elevation: 8,  // Adjust to control the shadow depth
   },
+  
   imgContainer: {
     width: '30%',
-    height: '100%'
+    height: '100%',
+    padding: 10,
   },
   imgResponsive: {
     flex: 1,
     width: undefined,
-    height: undefined
+    height: undefined,
+    backgroundColor: colors.grayLinesColor,
+    borderRadius: 5,
   },
   itemContainer: {
     flex: 1,

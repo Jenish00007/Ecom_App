@@ -35,20 +35,19 @@ export default {
     width: '100%',
     height: '25%',
     marginTop: '5%',
-    borderRadius: scale(3),
+    borderRadius: scale(5),
     backgroundColor: colors.backgroudGray
   },
-  brownColor: {
-    backgroundColor: colors.brownColor
-  },
+  
   btnContainer: {
     width: '100%',
     height: '25%',
     marginTop: scale(20),
-    borderRadius: scale(3),
+    borderRadius: scale(5),
     backgroundColor: colors.lightGrayColor,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#01AC66'
   },
   sendStyle: {
     fontFamily: fontStyles.PoppinsRegular,

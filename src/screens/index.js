@@ -22,6 +22,8 @@ import Category from './Category/Category'
 import SubCategory from './SubCategory/SubCategory'
 import Favourite from './Favourite/Favourite'
 import DeleteButton from './DeleteScreen/DeleteScreen'
+import DummyScreen from './Zipsiprofile/DummyScreen'
+
 
 export {
   AddressList,
@@ -47,5 +49,6 @@ export {
   Category,
   SubCategory,
   Favourite,
-  DeleteButton
+  DeleteButton,
+  DummyScreen 
 }

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.headerbackground
   },
   grayBackground: {
-    backgroundColor: colors.backgroudGray
+    backgroundColor: colors.white
   },
   headerText: {
     height: scale(80),
@@ -42,8 +42,9 @@ const styles = StyleSheet.create({
     ...alignment.MBlarge
   },
   image: {
-    width: scale(130),
-    height: scale(130)
+    width: scale(140),
+    height: scale(130),
+    borderRadius: 10,
   },
   descriptionEmpty: {
     justifyContent: 'center',

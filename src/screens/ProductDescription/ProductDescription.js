@@ -37,12 +37,30 @@ function ProductDescription(props) {
   const [price, priceSetter] = useState(null)
   const [stockAvailability, setStockAvailability] = useState(false)
   const [attributes, attributeSetter] = useState([])
+  const [kgCount, setKgCount] = useState(1); // New state for KG count
   const { data, loading, error } = useQuery(REVIEWS, {
     variables: { productId: product._id }
   })
   const zoomImages = product?.image.map(item => {
     return { url: item }
   })
+
+
+
+  // Increment KG
+  const handleIncrement = () => {
+    setKgCount((prev) => prev + 1);
+  };
+
+  // Decrement KG
+  const handleDecrement = () => {
+    if (kgCount > 1) {
+      setKgCount((prev) => prev - 1);
+    }
+  };
+
+
+
   function didFocus() {
     const itemAttributes = product?.attributes.length
       ? product.attributes.map(attribute => {
@@ -104,22 +122,22 @@ function ProductDescription(props) {
         <View style={alignment.MBlarge}>
           <View style={styles.caroselContainer}>
             <View style={styles.caroselSubContainer}>
-              <View style={styles.caroselTitleContainer}>
-                <TextDefault textColor={colors.fontMainColor} numberOfLines={2}>
-                  {product.title}
-                </TextDefault>
-              </View>
-              <View style={styles.caroselPriceContainer}>
-                <View style={styles.caroselPriceSubContainer}>
-                  <TextDefault
-                    numberOfLines={2}
-                    textColor={colors.fontBlue}
-                    bold>
-                    {configuration.currencySymbol}{' '}
-                    {parseFloat(price).toFixed(2)}
-                  </TextDefault>
-                </View>
-              </View>
+
+              {/* Like Container */}
+    <TouchableOpacity
+      style={styles.likeContainer}
+      onPress={() => {
+        // Add logic for liking the product here
+        console.log('Product liked!');
+      }}
+    >
+      <MaterialIcons
+        name="favorite-border" // Use "favorite" for a filled heart
+        size={scale(20)} // Adjust size as needed
+        color={colors.black} // Use the desired color
+      />
+    </TouchableOpacity>
+              
             </View>
           </View>
           <TouchableOpacity
@@ -132,6 +150,34 @@ function ProductDescription(props) {
               style={styles.imgResponsive}
             />
           </TouchableOpacity>
+
+
+          
+
+          {/* KG Selector Inside caroselContainer */}
+          <View style={[styles.kgSelectorContainer, { zIndex: 10 }]}>
+  {/* <TextDefault textColor={colors.fontMainColor} bold>
+    Select Weight (KG)
+  </TextDefault> */}
+  <View style={styles.kgSelectorButtons}>
+    <TouchableOpacity
+      style={[styles.kgButton, {backgroundColor: colors.grayLinesColor }]} // Debug styling
+      onPress={handleDecrement}
+    >
+      <MaterialIcons name="remove" size={scale(10)} color={colors.black} />
+    </TouchableOpacity>
+    <TextDefault textColor= {colors.fontMainColor}H5 style={styles.kgCount} bold>{kgCount} KG</TextDefault>
+    <TouchableOpacity
+      style={[styles.kgButton, {backgroundColor: colors.greenColor}]} // Debug styling
+      onPress={handleIncrement}
+    >
+      <MaterialIcons name="add" size={scale(10)} color={colors.black} />
+    </TouchableOpacity>
+  </View>
+</View>
+
+
+
           <View style={styles.scrollViewStyle}>
             <FlatList
               style={{ flex: 1 }}
@@ -154,12 +200,74 @@ function ProductDescription(props) {
                     style={styles.imgResponsive}
                   />
                 </TouchableOpacity>
+
+                
               )}
             />
+            <View style={styles.caroselTitleContainer}>
+                <TextDefault textColor={colors.fontMainColor} numberOfLines={2}>
+                  {product.title}
+                </TextDefault>
+              </View>
+              <View style={styles.caroselPriceContainer}>
+                <View style={styles.caroselPriceSubContainer}>
+                  <TextDefault
+                    numberOfLines={2}
+                    textColor={colors.fontBlue}
+                    bold>
+                    {configuration.currencySymbol}{' '}
+                    {parseFloat(price).toFixed(2)}
+                  </TextDefault>
+                </View>
+
+
+                <View style={styles.ratingStarsContainer}>
+  {Array(5)
+    .fill(1)
+    .map((_, index) => (
+      <MaterialIcons
+        key={index}
+        name="star"
+        size={scale(15)} // Adjust size as needed
+        color={index < (product.rating ?? 0) ? 'blue' : colors.fontPlaceholder}
+      />
+    ))}
+  <TextDefault style={styles.ratingText}>
+    ({(product.rating ?? 0).toFixed(1)}/5)
+  </TextDefault>
+</View>
+
+{/* KG Selector
+ <View style={styles.kgSelectorContainer}>
+            <TextDefault textColor={colors.fontMainColor} bold>
+              Select Weight (KG)
+            </TextDefault>
+            <View style={styles.kgSelectorButtons}>
+              <TouchableOpacity
+                style={styles.kgButton}
+                onPress={handleDecrement}
+              >
+                <MaterialIcons name="remove" size={scale(20)} color={colors.black} />
+              </TouchableOpacity>
+              <TextDefault style={styles.kgCount}>{kgCount} KG</TextDefault>
+              <TouchableOpacity
+                style={styles.kgButton}
+                onPress={handleIncrement}
+              >
+                <MaterialIcons name="add" size={scale(20)} color={colors.black} />
+              </TouchableOpacity>
+            </View>
+          </View> */}
+
+                
+              </View>
           </View>
+
+
+          
           <View style={styles.spacer} />
           <View style={styles.variationContainer}>
-            {stockAvailability &&
+            {/* {stockAvailability &&
               product.attributes.map((variation, index) => (
                 <VariationSection
                   key={variation._id}
@@ -167,7 +275,7 @@ function ProductDescription(props) {
                   selected={attributes[index].options._id}
                   handleAttributes={handleAttributes}
                 />
-              ))}
+              ))} */}
             <TextDefault bold style={styles.smallSpacer}>
               {'Description'}
             </TextDefault>
@@ -208,7 +316,8 @@ function ProductDescription(props) {
                 )
                 navigation.navigate('ShoppingCart')
               }}
-              text="Add to Shopping Cart"
+              text="Add to Cart"
+              style={styles.cartbtn}
             />
           </View>
         ) : (
@@ -224,7 +333,7 @@ function ProductDescription(props) {
   function noReview() {
     return (
       <TextDefault style={alignment.PTxSmall} center>
-        {'No review yet!'}
+        {'No review yet! !'}
       </TextDefault>
     )
   }
@@ -232,7 +341,7 @@ function ProductDescription(props) {
     <SafeAreaView style={[styles.flex, styles.safeAreaStyle]}>
       <View style={[styles.flex, styles.mainContainer]}>
         <BackHeader
-          title="Description"
+          title="Details"
           backPressed={() => props.navigation.goBack()}
         />
         {error ? (

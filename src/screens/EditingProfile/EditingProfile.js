@@ -1,217 +1,132 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react';
 import {
   View,
+  Text,
   TextInput,
-  KeyboardAvoidingView,
+  TouchableOpacity,
   ScrollView,
-  Platform
-} from 'react-native'
-import styles from './styles'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import {
-  BottomTab,
-  TextDefault,
-  BackHeader,
-  FlashMessage
-} from '../../components'
-import { SimpleLineIcons } from '@expo/vector-icons'
-import { scale, colors } from '../../utils'
-import { useNavigation, useRoute } from '@react-navigation/native'
-import UserContext from '../../context/User'
-import MainBtn from '../../ui/Buttons/MainBtn'
-import { updateUser } from '../../apollo/server'
-import { gql, useMutation } from '@apollo/client'
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
+import styles from './styles';
+import UserContext from '../../context/User';
+import MainBtn from '../../ui/Buttons/MainBtn';
 
-const UPDATEUSER = gql`
-  ${updateUser}
-`
+function EditingProfile() {
+  const navigation = useNavigation(); // Initialize navigation
+  const { profile } = useContext(UserContext);
+  const [name, setName] = useState(profile?.name || '');
+  const [phone, setPhone] = useState(profile?.phone || '');
+  const [gender, setGender] = useState('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-function EditingProfile(props) {
-  const route = useRoute()
-  const { profile } = useContext(UserContext)
-  const email = profile?.email ?? ''
-  const [name, nameSetter] = useState(profile?.name ?? '')
-  const [phone, phoneSetter] = useState(profile?.phone ?? '')
-  const backScreen = route.params ? route.params.backScreen : null
-  const [nameError, nameErrorSetter] = useState(null)
-  const [phoneError, phoneErrorSetter] = useState(null)
-  const navigation = useNavigation()
-  const [mutate, { loading: loadingMutation }] = useMutation(UPDATEUSER, {
-    onCompleted,
-    onError
-  })
+  // Gender options
+  const genderOptions = ['Male', 'Female', 'Other', 'Prefer not to say'];
 
-  useEffect(() => {
-    if (backScreen) {
-      phoneErrorSetter('Phone number is required')
-      FlashMessage({ message: 'Phone Number is missing' })
-    }
-  }, [backScreen])
+  // Handle gender selection
+  const handleGenderSelect = (selectedGender) => {
+    setGender(selectedGender);
+    setIsDropdownOpen(false); // Close the dropdown after selection
+  };
 
-  function onCompleted({ updateUser }) {
-    if (updateUser) {
-      FlashMessage({ message: "User's Info Updated", type: 'success' })
-    }
-    if (backScreen) {
-      navigation.goBack()
-    }
-  }
-  function onError(error) {
-    try {
-      FlashMessage({ message: error.message, type: 'warning' })
-    } catch (err) {}
-  }
-
-  function phoneValiation() {
-    let result = true
-    phoneErrorSetter(null)
-    const num = phone.trim().replace('.', '')
-    if (num.length < 11 || num.length > 15 || isNaN(num)) {
-      phoneErrorSetter('Minimum 11 and maximum 15 characters allowed')
-      result = false
-    }
-    return result
-  }
-  function nameValidation() {
-    let result = true
-    nameErrorSetter(null)
-    const nameRegex = /([a-zA-Z]{3,30}\s*)+/
-    if (!nameRegex.test(name)) {
-      nameErrorSetter('Full name is required')
-      result = false
-    }
-    return result
-  }
-
-  function validate() {
-    const phoneResult = phoneValiation()
-    const nameResult = nameValidation()
-    return phoneResult && nameResult
-  }
+  const handleSave = () => {
+    console.log('Profile Updated:', { name, phone, gender });
+  };
 
   return (
-    <SafeAreaView style={[styles.flex, styles.safeAreaStyle]}>
+    <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.flex}>
-        <BackHeader
-          title="Editing Profile"
-          backPressed={() => navigation.goBack()}
-        />
-        <ScrollView
-          style={styles.flex}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ flexGrow: 1 }}>
-          <View style={[styles.formMainContainer]}>
-            <View style={styles.formContainer}>
-              <View style={styles.profileImageContainer}>
-                <SimpleLineIcons
-                  name="user"
-                  size={scale(40)}
-                  color={colors.fontBrown}
-                />
-              </View>
-              <View style={styles.formContentContainer}>
-                <View style={styles.oneItemContainer}>
-                  <View style={styles.fullContainer}>
-                    <View style={styles.labelContainer}>
-                      <TextDefault textColor={colors.fontThirdColor} H5>
-                        {'Full Name'}
-                      </TextDefault>
-                    </View>
-                    <View
-                      style={[
-                        styles.inputContainer,
-                        !!nameError && styles.error
-                      ]}>
-                      <TextInput
-                        value={name}
-                        style={[styles.flex, styles.inputText]}
-                        placeholder="e.g Saad"
-                        placeholderTextColor={colors.fontPlaceholder}
-                        onChangeText={text => nameSetter(text)}
-                        onBlur={nameValidation}
-                      />
-                    </View>
-                    {!!nameError && (
-                      <TextDefault textColor={colors.errorColor} small>
-                        {nameError}{' '}
-                      </TextDefault>
-                    )}
-                  </View>
-                </View>
-                <View style={styles.oneItemContainer}>
-                  <View style={styles.fullContainer}>
-                    <View style={styles.labelContainer}>
-                      <TextDefault textColor={colors.fontThirdColor} H5>
-                        {'Email'}
-                      </TextDefault>
-                    </View>
-                    <View style={styles.inputContainer}>
-                      <TextInput
-                        style={[styles.flex, styles.disableInput]}
-                        defaultValue={email}
-                        editable={false}
-                      />
-                    </View>
-                  </View>
-                </View>
-                <View style={styles.oneItemContainer}>
-                  <View style={styles.fullContainer}>
-                    <View style={styles.labelContainer}>
-                      <TextDefault textColor={colors.fontThirdColor} H5>
-                        {'Phone Number'}
-                      </TextDefault>
-                    </View>
-                    <View
-                      style={[
-                        styles.inputContainer,
-                        !!phoneError && styles.error
-                      ]}>
-                      <TextInput
-                        style={[styles.flex, styles.inputText]}
-                        value={phone}
-                        keyboardType={'phone-pad'}
-                        placeholder="+92 3339461270"
-                        placeholderTextColor={colors.fontPlaceholder}
-                        onChangeText={text => phoneSetter(text)}
-                        onBlur={phoneValiation}
-                      />
-                    </View>
-                    {!!phoneError && (
-                      <TextDefault textColor={colors.errorColor} small>
-                        {phoneError}{' '}
-                      </TextDefault>
-                    )}
-                  </View>
-                </View>
-              </View>
+        style={styles.container}
+      >
+        <ScrollView contentContainerStyle={styles.scrollContent}>
+          {/* Header Section */}
+          <View style={styles.header}>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => navigation.goBack()} // Navigate back on button press
+            >
+              <FontAwesome name="arrow-left" size={24} color="black" />
+            </TouchableOpacity>
+            <Text style={styles.headerTitle}>Complete Your Profile</Text>
+            <Text style={styles.headerSubtitle}>
+              Don’t worry, only you can see your personal data. No one else
+              will be able to see it.
+            </Text>
+          </View>
 
-              <View style={styles.addContainer}>
-                <MainBtn
-                  loading={loadingMutation}
-                  style={{ width: '80%' }}
-                  onPress={async () => {
-                    if (validate()) {
-                      mutate({
-                        variables: {
-                          name: name,
-                          phone: phone,
-                          is_Active: true
-                        }
-                      })
-                    }
-                  }}
-                  text="Save"
-                />
-              </View>
+          {/* Profile Image Section */}
+          <View style={styles.profileImageContainer}>
+            <FontAwesome name="user" style={styles.profileImage} />
+            <TouchableOpacity style={styles.editIcon}>
+              <MaterialIcons name="edit" size={20} color="white" />
+            </TouchableOpacity>
+          </View>
+
+          {/* Form Section */}
+          <View style={styles.formContainer}>
+            {/* Name Input */}
+            <Text style={styles.label}>Name</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your name"
+              value={name}
+              onChangeText={setName}
+            />
+
+            {/* Phone Input */}
+            <Text style={styles.label}>Phone Number</Text>
+            <View style={styles.phoneContainer}>
+              <Text style={styles.countryCode}>+1</Text>
+              <TextInput
+                style={styles.phoneInput}
+                placeholder="Enter phone number"
+                value={phone}
+                onChangeText={setPhone}
+                keyboardType="phone-pad"
+              />
+            </View>
+
+            {/* Gender Dropdown */}
+            <Text style={styles.label}>Gender</Text>
+            <View>
+              <TouchableOpacity
+                style={styles.dropdown}
+                onPress={() => setIsDropdownOpen(!isDropdownOpen)}
+              >
+                <Text style={styles.dropdownText}>{gender || 'Nothing selected'}</Text>
+                <FontAwesome name="caret-down" size={16} color="#777" />
+              </TouchableOpacity>
+              {isDropdownOpen && (
+                <View style={styles.dropdownList}>
+                  {genderOptions.map((option, index) => (
+                    <TouchableOpacity
+                      key={index}
+                      style={styles.dropdownItem}
+                      onPress={() => handleGenderSelect(option)}
+                    >
+                      <Text style={styles.dropdownItemText}>{option}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              )}
             </View>
           </View>
+
+          {/* Submit Button */}
+          <MainBtn
+            text="Complete Profile"
+            onPress={handleSave}
+            style={styles.mainButton}
+            textStyle={styles.mainButtonText}
+          />
         </ScrollView>
       </KeyboardAvoidingView>
-      <BottomTab screen="PROFILE" />
     </SafeAreaView>
-  )
+  );
 }
 
-export default EditingProfile
+export default EditingProfile;

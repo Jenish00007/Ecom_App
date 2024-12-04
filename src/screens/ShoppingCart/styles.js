@@ -9,14 +9,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.headerbackground
   },
   mainContainer: {
-    backgroundColor: colors.themeBackground
+    backgroundColor: colors.white
   },
   subContainer: {
     flexGrow: 1,
     ...alignment.Psmall
   },
   spacer: {
-    marginTop: scale(10)
+    marginTop: scale(10),
   },
   textStyle: {
     fontFamily: fontStyles.PoppinsRegular,
@@ -31,12 +31,21 @@ const styles = StyleSheet.create({
   },
   summaryContainer: {
     width: '100%',
-    backgroundColor: colors.containerDark,
+    backgroundColor: colors.whiteColor, // Or your preferred background color
     alignSelf: 'center',
     padding: scale(10),
     justifyContent: 'flex-end',
-    borderRadius: scale(10)
+    borderRadius: scale(10),
+    borderWidth: 1, // Adjust this value to increase the border thickness
+    borderColor: '#D3D3D3', // Choose the border color (e.g., Dark Gray)
+    // Shadow for both Android and iOS
+    shadowColor: '#D3D3D3',  // Dark gray shadow color
+    shadowOffset: { width: 0, height: 4 },  // Shadow offset
+    shadowOpacity: 0.3,  // Shadow opacity (higher value = more visible shadow)
+    shadowRadius: 6,  // Radius of the shadow blur
+    elevation: 5,  // Shadow for Android (higher value = more prominent shadow)
   },
+  
   rowContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between'
@@ -44,9 +53,12 @@ const styles = StyleSheet.create({
   lineStyle: {
     width: '99%',
     height: 1,
-    backgroundColor: colors.horizontalLine,
-    alignSelf: 'center'
-  },
+    backgroundColor: 'transparent',  // Ensure the background is transparent
+    borderBottomWidth: 2,           // Set border width
+    borderBottomColor: '#D3D3D3',  // Set the color
+    borderStyle: 'dashed',          // Make the border dashed
+    alignSelf: 'center',
+  },  
   // empty
   subContainerImage: {
     flex: 1,

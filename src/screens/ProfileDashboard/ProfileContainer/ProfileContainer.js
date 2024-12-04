@@ -1,129 +1,79 @@
-import React, { useContext } from 'react'
-import { TouchableOpacity, View, ImageBackground } from 'react-native'
-import styles from './styles'
-import { scale, colors, alignment } from '../../../utils'
-import { SimpleLineIcons, Feather, Ionicons } from '@expo/vector-icons'
-import UserContext from '../../../context/User'
-import { useNavigation } from '@react-navigation/native'
-import { TextDefault } from '../../../components'
+import React, { useContext } from 'react';
+import { TouchableOpacity, View, Image, ScrollView } from 'react-native';
+import styles from './styles';
+import { Feather, MaterialIcons, Ionicons } from '@expo/vector-icons';
+import UserContext from '../../../context/User';
+import { useNavigation } from '@react-navigation/native';
+import { TextDefault } from '../../../components';
 
-function profileContainer(props) {
-  const navigation = useNavigation()
-  const { logout, profile, isLoggedIn } = useContext(UserContext)
+// Import your profile image
+import profileImage from '../../../assets/profileimage.jpg';
+
+function ProfileContainer(props) {
+  const navigation = useNavigation();
+  const { profile, isLoggedIn } = useContext(UserContext);
 
   return (
-    <View style={styles.profileContainer}>
-      <View style={styles.profileSubContainer}>
-        <View style={styles.topProfileContent}>
-          <View style={styles.topProfileIconContainer}>
-            <SimpleLineIcons
-              name="user"
-              size={scale(15)}
-              color={colors.fontMainColor}
-            />
-          </View>
-          <View style={styles.topProfileTextContainer}>
-            <TextDefault textColor={colors.fontMainColor} H4>
-              {'Profile'}
-            </TextDefault>
-          </View>
-        </View>
-        {isLoggedIn && (
-          <View style={styles.profieCenterContainer}>
-            <ImageBackground
-              source={require('../../../assets/images/formBackground.png')}
-              style={styles.imgResponsive3}>
-              <View style={styles.profileCenterContainerTop}>
-                <TouchableOpacity
-                  activeOpacity={1}
-                  onPress={() => {
-                    logout()
-                    navigation.navigate('MainLanding')
-                  }}
-                  style={styles.iconContainer}>
-                  <SimpleLineIcons
-                    name="logout"
-                    size={scale(20)}
-                    color={colors.pinkColor}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  activeOpacity={1}
-                  onPress={() => navigation.navigate('EditingProfile')}
-                  style={styles.iconContainer}>
-                  <Feather
-                    name="edit"
-                    size={scale(20)}
-                    color={colors.fontThirdColor}
-                  />
-                </TouchableOpacity>
-              </View>
-              <View style={styles.profileImageContainer}>
-                <View style={styles.profileImage}>
-                  <SimpleLineIcons
-                    name="user"
-                    size={scale(40)}
-                    color={colors.fontBrown}
-                  />
-                </View>
-              </View>
-              <View style={styles.nameContainer}>
-                <TextDefault
-                  style={[alignment.PLxSmall, alignment.PRxSmall]}
-                  numberOfLines={2}
-                  textColor={colors.fontMainColor}
-                  H4>
-                  {profile.name}
-                </TextDefault>
-              </View>
-              <View style={styles.addressContainer}>
-                <TouchableOpacity
-                  activeOpacity={1}
-                  onPress={() => navigation.navigate('AddressList')}
-                  style={{ alignItems: 'center' }}>
-                  <SimpleLineIcons
-                    name="location-pin"
-                    size={scale(20)}
-                    color={colors.fontThirdColor}
-                  />
-                  <TextDefault textColor={colors.fontSecondColor}>
-                    {'Addresses'}
-                  </TextDefault>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  activeOpacity={1}
-                  //onPress={() => modalizeRef.current.open('top')}
-                  onPress={() => navigation.navigate('DeleteButton')}
-                  style={{ alignItems: 'center' }}>
-                  <SimpleLineIcons
-                    name="trash"
-                    size={scale(20)}
-                    color={colors.fontThirdColor}
-                  />
-                  <TextDefault textColor={colors.fontSecondColor}>
-                    {'Delete'}
-                  </TextDefault>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  activeOpacity={1}
-                  style={{ alignItems: 'center' }}
-                  onPress={() => navigation.navigate('Favourite')}>
-                  <Ionicons
-                    name="ios-heart-outline"
-                    size={scale(20)}
-                    color={colors.fontThirdColor}
-                  />
-                  <TextDefault textColor={colors.fontSecondColor}>
-                    {'Favourites'}
-                  </TextDefault>
-                </TouchableOpacity>
-              </View>
-            </ImageBackground>
-          </View>
-        )}
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}>
+          <Ionicons name="chevron-back" size={24} color="#000" />
+        </TouchableOpacity>
+        <TextDefault style={styles.headerTitle} H4>
+          Profile
+        </TextDefault>
       </View>
-    </View>
-  )
+
+      {/* Profile Picture and Name */}
+      <View style={styles.profileSection}>
+        <Image
+          source={profileImage} // Use the imported image here
+          style={styles.profileImage}
+        />
+        <TouchableOpacity
+          style={styles.editIcon}
+          onPress={() => navigation.navigate('EditingProfile')}>
+          <Feather name="edit" size={18} color="#fff" />
+        </TouchableOpacity>
+        <TextDefault style={styles.profileName} H4>
+          {profile?.name || 'User Name'}
+        </TextDefault>
+      </View>
+
+      {/* Settings Options */}
+      <View style={styles.settingsSection}>
+        {[
+          { label: 'Your Profile', icon: 'person-outline', route: 'UserProfile' },
+          { label: 'Manage Address', icon: 'location-on', route: 'AddressList' },
+          // { label: 'Payment Methods', icon: 'credit-card', route: 'PaymentMethods' },
+          // { label: 'My Wallet', icon: 'wallet-outline', route: 'Wallet' },
+          // { label: 'My Coupons', icon: 'tag', route: 'Coupons' },
+          { label: 'My Active Orders', icon: 'list', route: 'ActiveOrders' }, // New Label
+          { label: 'Previous Orders', icon: 'history', route: 'PreviousOrders' }, // New Label
+          { label: 'Delete', icon: 'delete', route: 'DeleteButton' }, // New Label
+          { label: 'Favourites', icon: 'star-outline', route: 'Favourite' }, // New Label
+          { label: 'Settings', icon: 'settings', route: 'Settings' },
+          { label: 'Help Center', icon: 'help-circle-outline', route: 'HelpCenter' },
+          { label: 'Privacy Policy', icon: 'lock-closed-outline', route: 'PrivacyPolicy' },
+        ].map((item, index) => (
+          <TouchableOpacity
+  key={index}
+  style={styles.settingsItem}
+  onPress={() => navigation.navigate(item.route)}>
+  <View style={styles.settingsItemIcon}>
+    <MaterialIcons name={item.icon} size={24} color="#01AC66" />
+  </View>
+  <TextDefault style={styles.settingsItemText} H5>
+    {item.label}
+  </TextDefault>
+  <Ionicons name="chevron-forward-outline" size={20} color="#01AC66" />
+</TouchableOpacity>
+        ))}
+      </View>
+    </ScrollView>
+  );
 }
 
-export default profileContainer
+export default ProfileContainer;      
