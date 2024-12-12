@@ -196,7 +196,7 @@ function NewAddress() {
                   <View style={styles.halfContainer}>
                     <View style={styles.labelContainer}>
                       <TextDefault textColor={colors.fontSecondColor} H5>
-                        {'Building/Villa Name'}
+                        {'Building/VillaName'}
                       </TextDefault>
                     </View>
                     <View style={styles.inputContainer}>

@@ -1,3 +1,4 @@
+import { Header } from '@react-navigation/stack'
 import { verticalScale, scale, colors, alignment } from '../../utils'
 import { StyleSheet } from 'react-native'
 
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
     height: '85%',
     width: '100%',
     alignItems: 'center',
-    backgroundColor: colors.backgroudGray
+    backgroundColor: colors.white
   },
   backImg: {
     width: '15%',
@@ -25,29 +26,21 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   // header
-  header: {
-    height: '8%',
-    width: '100%',
-    backgroundColor: colors.whiteColor,
-    borderBottomWidth: verticalScale(1),
-    borderColor: colors.grayLinesColor,
-    alignItems: 'center'
-  },
-  headerRow: {
-    height: '100%',
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  headerText: {
-    width: '60%'
-  },
-  headerBtn: {
-    width: '30%',
-    height: '80%',
-    justifyContent: 'center',
-    alignItems: 'flex-start'
-  },
+  // header: {
+  //   height: '8%',
+  //   width: '90%',
+  //   backgroundColor: colors.whiteColor,
+  //   borderBottomWidth: verticalScale(1),
+  //   borderColor: colors.grayLinesColor,
+  //   alignItems: 'center',
+  //   justifyContent: 'center'
+  // },
+  // headerBtn: {
+  //   width: '30%',
+  //   height: '80%',
+  //   justifyContent: 'center',
+  //   alignItems: 'flex-start'
+  // },
   // main
   main: {
     height: '100%',
@@ -86,6 +79,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: scale(3)
-  }
+  },
+  newAddressButton: {
+    borderWidth: 1,
+    borderColor: colors.greenColor,
+    borderStyle: 'dashed',
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 10,
+    marginHorizontal: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.backgroudGray,
+    
+  },
+  newAddressText: {
+    marginLeft: 5,
+    fontSize: 16,
+    color: colors.greenColor,
+    padding: 8
+  },
+  
 })
 export default styles

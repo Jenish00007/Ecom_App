@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
    
   },
   cardImageContainer: {
-    width: '90%',
-    height: '90%',
-    // aspectRatio: 1.5, // Maintain consistent card size
+    width: '100%',
+    height: '100%',
+    // aspectRatio: 1.2, // Maintain consistent card size
     borderRadius: 10,
     overflow: 'hidden',
   },
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     width: '90%', // Match text width to card width
-    marginLeft: -50,
+    // marginLeft: -40,
   },
 });
 

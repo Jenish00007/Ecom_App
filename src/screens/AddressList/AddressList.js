@@ -1,21 +1,19 @@
-import React, { useContext } from 'react'
-import { View, TouchableOpacity, FlatList } from 'react-native'
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { useNavigation, useRoute } from '@react-navigation/native'
-import styles from './styles'
-import BottomTab from '../../components/BottomTab/BottomTab'
-import Card from './Card/AddressCard'
-import { colors, alignment } from '../../utils'
-import { TextDefault } from '../../components'
-import UserContext from '../../context/User'
-import MainBtn from '../../ui/Buttons/MainBtn'
+import React, { useContext } from 'react';
+import { View, TouchableOpacity, FlatList } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import styles from './styles';
+import Card from './Card/AddressCard';
+import { colors, alignment } from '../../utils';
+import { TextDefault, BackHeader, BottomTab } from '../../components';
+import UserContext from '../../context/User';
 
 function AddressList() {
-  const navigation = useNavigation()
-  const route = useRoute()
-  const { profile } = useContext(UserContext)
-  const cartAddress = route.params?.backScreen ?? null
+  const navigation = useNavigation();
+  const route = useRoute();
+  const { profile } = useContext(UserContext);
+  const cartAddress = route.params?.backScreen ?? null;
 
   function emptyView() {
     return (
@@ -36,49 +34,34 @@ function AddressList() {
             Please add a new one.
           </TextDefault>
         </View>
-        <View style={styles.btnContainer}>
-          <MainBtn
-            onPress={() =>
-              navigation.navigate('NewAddress', { backScreen: cartAddress })
-            }
-            text="Add new address"
-          />
-        </View>
       </View>
-    )
+    );
   }
+
+  function renderAddNewAddressButton() {
+    return (
+      <TouchableOpacity
+        style={styles.newAddressButton}
+        onPress={() => navigation.navigate('NewAddress', { backScreen: cartAddress })}>
+        <Ionicons name="add" size={20} color={colors.greenTextColor} />
+        <TextDefault textColor={colors.greenTextColor} style={styles.newAddressText}>
+          Add New Shipping Address
+        </TextDefault>
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <SafeAreaView style={[styles.flex, styles.safeAreaStyle]}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <View style={styles.headerRow}>
-            <TouchableOpacity
-              activeOpacity={0}
-              onPress={() => navigation.goBack()}
-              style={styles.backImg}>
-              <Ionicons name="ios-arrow-back" size={30} />
-            </TouchableOpacity>
-            <TextDefault
-              textColor={colors.fontMainColor}
-              style={styles.headerText}
-              H4>
-              My Addresses
-            </TextDefault>
-            <View style={styles.headerBtn}>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate('NewAddress', { backScreen: cartAddress })
-                }
-                activeOpacity={0}>
-                <TextDefault textColor={colors.greenTextColor}>
-                  New Address
-                </TextDefault>
-              </TouchableOpacity>
-            </View>
-          </View>
+        <BackHeader
+        title={'Manage Address'}
+        backPressed={() => navigation.goBack()}
+      />
         </View>
         <View style={styles.body}>
-          <View style={styles.main}>
+        <View style={styles.main}>
             <FlatList
               style={styles.flex}
               data={profile.addresses.filter(a => a.isActive)}
@@ -88,12 +71,15 @@ function AddressList() {
                 <Card item={item} default={item.selected} />
               )}
             />
+            {/* Render Add New Address Button Below the FlatList */}
+            {renderAddNewAddressButton()}
           </View>
         </View>
-        <BottomTab screen="PROFILE" />
+        
       </View>
+      <BottomTab screen="PROFILE" />
     </SafeAreaView>
-  )
+  );
 }
 
-export default AddressList
+export default AddressList;

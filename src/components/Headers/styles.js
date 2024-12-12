@@ -1,51 +1,61 @@
-import { fontStyles } from '../../utils/fontStyles'
-import { scale } from '../../utils/scaling'
-import { colors } from '../../utils/colors'
-import { Dimensions } from 'react-native'
-const { width, height } = Dimensions.get('window')
+import { fontStyles } from '../../utils/fontStyles';
+import { scale } from '../../utils/scaling';
+import { colors } from '../../utils/colors';
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 export default {
   container: {
     width: width,
-    height: height * 0.07,
+    height: height * 0.10,
     backgroundColor: colors.whiteColor,
     justifyContent: 'center',
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e6e6e6'
   },
   subContainer: {
     width: '100%',
     height: '80%',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginLeft: 25, // Add space without affecting the title
   },
   leftContainer: {
     width: '15%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    position: 'absolute', // Ensures it doesn't affect the layout
+    left: 0, // Stays pinned to the left
   },
   headerText: {
-    flex: 1,
     fontFamily: fontStyles.PoppinsRegular,
-    fontSize: scale(18)
+    fontSize: scale(18),
+    textAlign: 'center', // Center the text
+    position: 'absolute', // Makes the title independent of other elements
+    left: '48%', // Centers the title horizontally
+    transform: [{ translateX: -width * 0.15 }], // Adjust centering offset (based on width of left and right containers)
+    color: colors.fontMainColor, // Optional: Customize text color
   },
   titleContainer: {
     flexDirection: 'row',
-    width: '85%'
-  },
-  iconStyle: {
-    width: scale(20),
-    height: scale(20)
-  },
-  rightTitle: {
-    fontFamily: fontStyles.PoppinsRegular,
-    fontSize: scale(14)
+    width: '85%',
+    justifyContent: 'center',
   },
   rightContainer: {
     width: '15%',
     height: '70%',
     justifyContent: 'center',
-    alignItems: 'center'
-  }
-}
+    alignItems: 'center',
+    position: 'absolute', // Prevents it from affecting layout
+    right: 0, // Stays pinned to the right
+  },
+  circle: {
+    width: 50,
+    height: 50,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: colors.grayLinesColor,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+};

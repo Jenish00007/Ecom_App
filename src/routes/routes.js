@@ -60,7 +60,13 @@ function noDrawer() {
       <NavigationStack.Screen name="Zipsiprofile" component={Screen.DummyScreen} />
       {/* Add the CategoryCard screen here */}
       <NavigationStack.Screen name="Category" component={Screen.Category} />
+
+
+      {/* Add the MyActiveOrder screen here */}
+    <NavigationStack.Screen name="MyActiveOrder" component={Screen.MyActiveOrder} />
     </NavigationStack.Navigator>
+
+    
   );
 }
 

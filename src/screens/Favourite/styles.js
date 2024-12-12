@@ -1,121 +1,86 @@
-import { Dimensions, StyleSheet } from 'react-native'
-import { alignment, colors, scale } from '../../utils'
-const { height } = Dimensions.get('window')
+import { Dimensions, StyleSheet } from 'react-native';
+import { alignment, colors, scale } from '../../utils';
+const { height, width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   flex: {
-    flex: 1
+    flex: 1,
   },
   safeAreaStyle: {
-    backgroundColor: colors.headerbackground
+    backgroundColor: colors.headerbackground,
   },
   grayBackground: {
-    backgroundColor: colors.themeBackground
+    backgroundColor: colors.white,
   },
   contentContainer: {
     flexGrow: 1,
-    width: '90%',
-    alignSelf: 'center',
-    ...alignment.PBsmall
+    padding: scale(10),
+    justifyContent: 'space-between',
   },
   subContainerImage: {
     flex: 1,
     width: '100%',
     justifyContent: 'center',
-    alignContent: 'center'
+    alignContent: 'center',
   },
   image: {
     width: scale(130),
-    height: scale(130)
+    height: scale(130),
   },
   descriptionEmpty: {
     justifyContent: 'center',
     alignItems: 'center',
-    ...alignment.Plarge
+    ...alignment.Plarge,
   },
   emptyButton: {
     width: '80%',
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+  },
+  cardWrapper: {
+    marginBottom: scale(15),
+    alignItems: 'flex-start',
   },
   cardContainer: {
-    width: '100%',
-    height: height * 0.14,
-    borderRadius: scale(8),
-    flexDirection: 'row',
-    borderWidth: scale(1),
+    width: width * 0.45,
+    height: height * 0.25,
+    margin: scale(5),
+    borderRadius: scale(10),
+    borderWidth: 1,
     borderColor: colors.medHorizontalLine,
-    ...alignment.MTxSmall,
-    ...alignment.MBxSmall
+    backgroundColor: colors.grayLinesColor,
+    position: 'relative',
   },
-  leftContainer: {
-    width: '40%',
-    height: '100%'
-  },
-  imgResponsive3: {
-    width: '70%',
-    height: '70%'
-  },
-  imgResponsive: {
-    flex: 1,
-    width: undefined,
-    height: undefined
-  },
-  roundedBorder: {
-    borderRadius: scale(8),
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 0
-  },
-  rightContainer: {
-    marginLeft: '5%',
-    width: '55%',
-    height: '100%',
-    justifyContent: 'center'
-  },
-  subRightContainer: {
-    width: '95%',
-    height: '90%'
-  },
-  titleContainer: {
+  cardImage: {
     width: '100%',
-    height: '33%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  rightArrowContainer: {
     height: '100%',
-    width: '10%',
-    justifyContent: 'center'
+    borderTopLeftRadius: scale(10),
+    borderTopRightRadius: scale(10),
   },
-  subTitleContainer: {
-    marginTop: '-3%',
+  likeButtonContainer: {
+    position: 'absolute',
+    top: scale(5),
+    right: scale(5),
+    padding: scale(5),
+  },
+  cardDetailsWrapper: {
     width: '100%',
-    height: '17%'
+    paddingHorizontal: scale(5),
+    alignItems: 'flex-start',
+    marginTop: scale(5),
   },
-  actionsContainer: {
-    flex: 1,
-    justifyContent: 'flex-end'
+  productTitle: {
+    fontSize: scale(14),
+    marginBottom: scale(5),
+    width: width * 0.45,
   },
-  subActionsContainer: {
-    width: '100%',
-    height: '60%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+  productPrice: {
+    fontSize: scale(12),
+    marginBottom: scale(5),
+    color: colors.fontBlue,
+    width: width * 0.45,
   },
-  actionContainer: {
-    width: '25%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'flex-end'
-  },
-  // empty
-  imageContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    ...alignment.MBlarge
-  }
-})
-export default styles
+});
+
+export default styles;

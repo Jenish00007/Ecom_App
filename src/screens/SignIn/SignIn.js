@@ -35,6 +35,8 @@ const LOGIN = gql`
 
 function SignIn() {
   const navigation = useNavigation()
+  const { setTokenAsync } = useContext(UserContext);
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState(null)
@@ -42,7 +44,6 @@ function SignIn() {
   const [modalVisible, setModalVisible] = useState(false) // For modal visibility
   const [loading, setLoading] = useState(false)
   const [enableApple, setEnableApple] = useState(false)
-  const { setTokenAsync } = useContext(UserContext)
 
   const [mutate] = useMutation(LOGIN, {
     onCompleted: async data => {

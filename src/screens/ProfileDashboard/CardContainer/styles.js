@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native'
+import { Dimensions, StatusBar } from 'react-native'
 import { verticalScale, scale } from '../../../utils/scaling'
 import { colors } from '../../../utils/colors'
 import { fontStyles } from '../../../utils/fontStyles'
@@ -12,6 +12,27 @@ export default {
   mainCardContainer: {
     flexGrow: 1,
     alignItems: 'center'
+  },
+  container: {
+    flex: 1,
+    backgroundColor: colors.whiteColor,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    marginTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
+    backgroundColor: colors.white,
+  },
+  backButton: {
+    position: 'absolute',
+    left: 10,
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: colors.black,
   },
   cardContainer: {
     width: '90%',
@@ -119,5 +140,26 @@ export default {
   image: {
     width: scale(50),
     height: scale(50)
-  }
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    borderBottomWidth: 1,
+    borderBottomColor: colors.grayLinesColor,
+  },
+  tabButton: {
+    paddingVertical: 10,
+  },
+  tabButtonText: {
+    fontSize: 16,
+    color: colors.grey,
+  },
+  activeTabButton: {
+    borderBottomWidth: 2,
+    borderBottomColor: colors.greenColor,
+  },
+  activeTabButtonText: {
+    fontWeight: 'bold',
+    color: colors.greenColor,
+  },
 }

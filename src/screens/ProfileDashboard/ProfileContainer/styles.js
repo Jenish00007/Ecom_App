@@ -1,27 +1,28 @@
 import { StyleSheet } from 'react-native';
 import { verticalScale, scale } from '../../../utils/scaling';
 import { fontStyles } from '../../../utils/fontStyles';
+import { colors } from '../../../utils';
 
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     padding: verticalScale(16),
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: verticalScale(20),
-  },
-  backButton: {
-    marginRight: scale(10),
-  },
-  headerTitle: {
-    fontFamily: fontStyles.PoppinsSemiBold,
-    fontSize: verticalScale(18),
-    color: '#000',
-    marginLeft: 115,
-  },
+  // header: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   marginBottom: verticalScale(20),
+  // },
+  // backButton: {
+  //   marginRight: scale(10),
+  // },
+  // headerTitle: {
+  //   fontFamily: fontStyles.PoppinsSemiBold,
+  //   fontSize: verticalScale(18),
+  //   color: colors.fontMainColor,
+  //   marginLeft: 115,
+  // },
   profileSection: {
     alignItems: 'center',
     marginBottom: verticalScale(30),
@@ -31,13 +32,13 @@ const styles = StyleSheet.create({
     height: verticalScale(100),
     borderRadius: verticalScale(50),
     borderWidth: 5,
-    borderColor: '#01AC66',
+    borderColor: colors.greenColor,
   },
   editIcon: {
     position: 'absolute', // Keep it absolute for overlay
     bottom: verticalScale(40), // Align it with the bottom of the profile image
     right: verticalScale(100), // Align it to the right of the profile image
-    backgroundColor: '#01AC66',
+    backgroundColor: colors.greenColor,
     borderRadius: verticalScale(20), // Circular shape
     padding: scale(5),
   },
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     fontFamily: fontStyles.PoppinsSemiBold,
     fontSize: verticalScale(20),
     marginTop: verticalScale(10),
-    color: '#000',
+    color: colors.fontMainColor,
   },
   settingsSection: {
     marginTop: verticalScale(-2),
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: verticalScale(12),
     borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
+    borderBottomColor: colors.grayLinesColor,
   },
   settingsItemIcon: {
     marginRight: scale(15),
@@ -63,8 +64,8 @@ const styles = StyleSheet.create({
   settingsItemText: {
     flex: 1,
     fontFamily: fontStyles.PoppinsRegular,
-    fontSize: verticalScale(16),
-    color: '#000',
+    // fontSize: verticalScale(16),
+    color: colors.fontMainColor,
   },
  
 });

@@ -7,11 +7,14 @@ function BackHeader(props) {
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
+        {/* Back Arrow Inside Circle */}
         <TouchableOpacity
-          activeOpacity={0}
+          activeOpacity={0.7}
           style={styles.leftContainer}
           onPress={() => props.backPressed()}>
-          <Ionicons name="ios-arrow-back" size={30} />
+          <View style={styles.circle}>
+            <Ionicons name="ios-arrow-back" size={28} color="#666" />
+          </View>
         </TouchableOpacity>
         <Text numberOfLines={1} style={styles.headerText}>
           {props.title}

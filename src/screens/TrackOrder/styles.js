@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { alignment, colors, verticalScale, scale } from '../../utils'
+import { StyleSheet } from 'react-native';
+import { alignment, colors, verticalScale, scale } from '../../utils';
 
 export default {
   flex: {
@@ -11,53 +11,51 @@ export default {
   mainContainer: {
     backgroundColor: colors.themeBackground
   },
-  line: {
-    width: '100%',
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: colors.medHorizontalLine,
-    ...alignment.MTxSmall,
-    ...alignment.MBxSmall
-  },
-  backImg: {
-    marginBottom: '3%',
-    marginLeft: '5%'
-  },
-  cardContainer: {
-    backgroundColor: colors.backgroudGray,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    ...alignment.MBlarge
-  },
-  card: {
-    backgroundColor: colors.whiteColor,
-    width: '95%',
-    borderRadius: scale(8),
-    ...alignment.Psmall
-  },
-  cardLeftContainer: {
-    width: '35%',
-    height: '100%',
-    borderTopLeftRadius: verticalScale(8),
-    borderBottomLeftRadius: verticalScale(8)
-  },
-  cardRightContainer: {
-    width: '60%',
-    height: '100%',
-    ...alignment.MLxSmall
-  },
-  imgResponsive: {
-    flex: 1,
-    width: undefined,
-    height: undefined,
-    borderTopLeftRadius: verticalScale(8),
-    borderBottomLeftRadius: verticalScale(8)
-  },
   timelineContainer: {
-    backgroundColor: colors.backgroudGray,
+    backgroundColor: colors.white,
     flex: 1,
     ...alignment.PTlarge,
     ...alignment.PLsmall,
     ...alignment.PRsmall
+  },
+  orderIdContainer: {
+    width: '100%',
+    paddingVertical: verticalScale(10),
+    paddingHorizontal: scale(10),
+    alignItems: 'flex-start',
+  },
+  detailContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    ...alignment.MBxSmall
+  },
+  titleContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
+  titleStyle: {
+    fontSize: scale(16),
+    color: colors.blackText,
+    ...alignment.MBxSmall,
+  },
+  descriptionStyle: {
+    fontSize: scale(14),
+    color: colors.fontSecondColor
+  },
+  iconContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: scale(40),
+    height: scale(40),
+    marginRight: scale(-5),
+    marginBottom: verticalScale(10)
+  },
+  iconStyle: {
+    marginRight: scale(-5),
+    marginTop: verticalScale(-20),
+    marginleft: -20,
+    paddingVertical: 10
   }
-}
+};

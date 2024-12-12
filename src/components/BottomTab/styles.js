@@ -1,40 +1,46 @@
-import { Dimensions, StyleSheet } from 'react-native'
-import { verticalScale, scale } from '../../utils/scaling'
-import { fontStyles } from '../../utils/fontStyles'
-import { colors } from '../../utils'
+import { Dimensions, StyleSheet } from 'react-native';
+import { verticalScale, scale } from '../../utils/scaling';
+import { fontStyles } from '../../utils/fontStyles';
+import { colors } from '../../utils';
 
-const { height, width } = Dimensions.get('window')
+const { height, width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  active: {
-    backgroundColor: colors.themeBackground
-  },
   footerContainer: {
     width,
-    height: height * 0.07,
+    height: height * 0.08,
     flexDirection: 'row',
-    backgroundColor: 'white'
+    backgroundColor: colors.white,
   },
   footerBtnContainer: {
-    width: '25%',
+    width: '20%',
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   imgContainer: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  imgResponsive: {
-    flex: 1,
-    width: undefined,
-    height: undefined
+  activeText: {
+    marginTop: verticalScale(4),
+    color: colors.greenColor,
+    fontSize: 10,
+    fontFamily: fontStyles.PoppinsBold,
+    fontWeight: 'bold',
+  },
+  inactiveText: {
+    marginTop: verticalScale(4),
+    color: colors.darkGrayText,
+    fontSize: 10,
+    fontFamily: fontStyles.PoppinsRegular,
+    fontWeight: 'bold',
   },
   profileContainer: {
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative'
+    position: 'relative',
   },
   profileBadge: {
     width: verticalScale(8),
@@ -42,27 +48,25 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: '25%',
     top: 0,
-    backgroundColor: '#EE9826',
-    borderRadius: verticalScale(4)
+    backgroundColor: colors.greenColor,
+    borderRadius: verticalScale(4),
   },
-  shoppingContainer: {
-    width: '50%',
-    height: '40%',
-    position: 'relative'
-  },
-  shoppingBadgeContainer: {
-    width: '40%',
-    height: '50%',
+  badgeContainer: {
     position: 'absolute',
-    right: -scale(3),
-    top: 0,
+    top: -scale(5),
+    right: -scale(10),
+    backgroundColor: colors.redColor,
+    borderRadius: scale(10),
+    height: scale(16),
+    width: scale(16),
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  shoppingBadgeStyle: {
-    fontFamily: fontStyles.PoppinsRegular,
-    color: '#6178DE',
-    fontSize: verticalScale(8)
-  }
-})
-export default styles
+  badgeText: {
+    color: colors.white,
+    fontSize: scale(10),
+    fontWeight: 'bold',
+  },
+});
+
+export default styles;

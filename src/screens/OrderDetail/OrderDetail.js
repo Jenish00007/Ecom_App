@@ -23,6 +23,9 @@ function OrderDetail(props) {
   const configuration = useContext(ConfigurationContext)
   const order = orders.find(o => o._id === id)
 
+
+
+
   return (
     <SafeAreaView style={[styles.flex, styles.safeAreaStyle]}>
       <View style={styles.flex}>
@@ -101,19 +104,20 @@ function OrderDetail(props) {
             <View style={styles.line} />
             <View style={styles.deliverContainer}>
               <View style={styles.deliverSubContainer}>
+                
                 <TextDefault
-                  textColor={colors.fontBrown}
+                  textColor={colors.fontMainColor}
                   H4
                   style={alignment.PBxSmall}>
                   {'Deliver to'}
                 </TextDefault>
-                <TextDefault textColor={colors.fontThirdColor}>
+                <TextDefault textColor={colors.fontSecondColor}>
                   {order.user.name}
                 </TextDefault>
-                <TextDefault textColor={colors.fontThirdColor}>
+                <TextDefault textColor={colors.fontSecondColor}>
                   {order.user.email}
                 </TextDefault>
-                <TextDefault textColor={colors.fontThirdColor}>
+                <TextDefault textColor={colors.fontSecondColor}>
                   {order.user.phone}
                 </TextDefault>
                 <View style={styles.line} />
@@ -134,14 +138,14 @@ function OrderDetail(props) {
                 )}
               </View>
             </View>
-            <View style={styles.line}></View>
+            {/* <View style={styles.line}></View> */}
             <View style={styles.paymentContainer}>
               <View style={styles.paymentSubContainer}>
-                <TextDefault textColor={colors.fontBrown} H4>
+                <TextDefault textColor={colors.fontMainColor} H4 >
                   {'Payment'}
                 </TextDefault>
                 <View style={styles.twoItems}>
-                  <TextDefault textColor={colors.fontThirdColor}>
+                  <TextDefault textColor={colors.fontSecondColor}>
                     {'Payment Method'}
                   </TextDefault>
                   <TextDefault textColor={colors.fontMainColor}>
@@ -149,7 +153,7 @@ function OrderDetail(props) {
                   </TextDefault>
                 </View>
                 <View style={styles.twoItems}>
-                  <TextDefault textColor={colors.fontThirdColor}>
+                  <TextDefault textColor={colors.fontSecondColor}>
                     {'Delivery'}
                   </TextDefault>
                   <TextDefault textColor={colors.fontMainColor}>
@@ -158,7 +162,7 @@ function OrderDetail(props) {
                   </TextDefault>
                 </View>
                 <View style={styles.twoItems}>
-                  <TextDefault textColor={colors.fontThirdColor}>
+                  <TextDefault textColor={colors.fontSecondColor}>
                     {'Sub Total'}
                   </TextDefault>
                   <TextDefault textColor={colors.fontMainColor}>
@@ -170,10 +174,11 @@ function OrderDetail(props) {
                 </View>
               </View>
             </View>
-            <View style={styles.line}></View>
+            {/* <View style={styles.line}></View> */}
             <View style={styles.totalContainer}>
               <View style={styles.totalSubContainer}>
                 <View style={styles.twoItems}>
+                  
                   <TextDefault textColor={colors.fontMainColor} H4>
                     {'Total'}
                   </TextDefault>

@@ -4,10 +4,11 @@ import styles from './styles';
 import { Feather, MaterialIcons, Ionicons } from '@expo/vector-icons';
 import UserContext from '../../../context/User';
 import { useNavigation } from '@react-navigation/native';
-import { TextDefault } from '../../../components';
+import { TextDefault, BackHeader } from '../../../components';
 
 // Import your profile image
 import profileImage from '../../../assets/profileimage.jpg';
+import { colors } from '../../../utils';
 
 function ProfileContainer(props) {
   const navigation = useNavigation();
@@ -15,16 +16,11 @@ function ProfileContainer(props) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}>
-          <Ionicons name="chevron-back" size={24} color="#000" />
-        </TouchableOpacity>
-        <TextDefault style={styles.headerTitle} H4>
-          Profile
-        </TextDefault>
-      </View>
+      <BackHeader
+          title={'Profile'}
+          backPressed={() => navigation.goBack()}
+          
+        />
 
       {/* Profile Picture and Name */}
       <View style={styles.profileSection}>
@@ -35,7 +31,10 @@ function ProfileContainer(props) {
         <TouchableOpacity
           style={styles.editIcon}
           onPress={() => navigation.navigate('EditingProfile')}>
-          <Feather name="edit" size={18} color="#fff" />
+          <Feather 
+          name="edit" 
+          size={18} 
+          color={colors.white} />
         </TouchableOpacity>
         <TextDefault style={styles.profileName} H4>
           {profile?.name || 'User Name'}
@@ -43,32 +42,40 @@ function ProfileContainer(props) {
       </View>
 
       {/* Settings Options */}
-      <View style={styles.settingsSection}>
+      <View style={styles.settingsSection} H5>
         {[
-          { label: 'Your Profile', icon: 'person-outline', route: 'UserProfile' },
-          { label: 'Manage Address', icon: 'location-on', route: 'AddressList' },
-          // { label: 'Payment Methods', icon: 'credit-card', route: 'PaymentMethods' },
-          // { label: 'My Wallet', icon: 'wallet-outline', route: 'Wallet' },
-          // { label: 'My Coupons', icon: 'tag', route: 'Coupons' },
-          { label: 'My Active Orders', icon: 'list', route: 'ActiveOrders' }, // New Label
-          { label: 'Previous Orders', icon: 'history', route: 'PreviousOrders' }, // New Label
-          { label: 'Delete', icon: 'delete', route: 'DeleteButton' }, // New Label
-          { label: 'Favourites', icon: 'star-outline', route: 'Favourite' }, // New Label
-          { label: 'Settings', icon: 'settings', route: 'Settings' },
-          { label: 'Help Center', icon: 'help-circle-outline', route: 'HelpCenter' },
-          { label: 'Privacy Policy', icon: 'lock-closed-outline', route: 'PrivacyPolicy' },
-        ].map((item, index) => (
+  { label: 'Your Profile', icon: 'person-outline', route: 'EditingProfile' },
+  { label: 'Manage Address', icon: 'location-on', route: 'AddressList' },
+  { label: 'Payment Methods', icon: 'credit-card', route: 'PaymentMethods' },
+  { label: 'My Wallet', icon: 'account-balance-wallet', route: 'Wallet' },  // Changed icon name to 'wallet'
+  { label: 'My Coupons', icon: 'tag', route: 'Coupons' },
+  { label: 'My Orders', icon: 'list', route: 'MyActiveOrder' }, 
+  { label: 'Previous Orders', icon: 'history', route: 'PreviousOrders' },
+  { label: 'Delete', icon: 'delete', route: 'DeleteButton' },
+  { label: 'Favourites', icon: 'star-outline', route: 'Favourite' },
+  { label: 'Settings', icon: 'settings', route: 'Settings' },
+  { label: 'Help Center', icon: 'help', route: 'HelpCenter' },  // Changed icon name to 'help'
+  { label: 'Privacy Policy', icon: 'lock', route: 'PrivacyPolicy' },  // Changed icon name to 'lock'
+]
+.map((item, index) => (
           <TouchableOpacity
   key={index}
   style={styles.settingsItem}
   onPress={() => navigation.navigate(item.route)}>
   <View style={styles.settingsItemIcon}>
-    <MaterialIcons name={item.icon} size={24} color="#01AC66" />
+  <MaterialIcons 
+      name={item.icon} 
+      size={24} 
+      color={colors.greenColor}  // Use the color from utils
+    />
   </View>
   <TextDefault style={styles.settingsItemText} H5>
     {item.label}
   </TextDefault>
-  <Ionicons name="chevron-forward-outline" size={20} color="#01AC66" />
+  <Ionicons 
+  name="chevron-forward-outline" 
+  size={20} 
+  color={colors.greenColor} />
 </TouchableOpacity>
         ))}
       </View>

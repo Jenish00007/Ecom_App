@@ -23,7 +23,7 @@ import SubCategory from './SubCategory/SubCategory'
 import Favourite from './Favourite/Favourite'
 import DeleteButton from './DeleteScreen/DeleteScreen'
 import DummyScreen from './Zipsiprofile/DummyScreen'
-
+import MyActiveOrder from './MyActiveOrder/MyActiveOrder'
 
 export {
   AddressList,
@@ -50,5 +50,6 @@ export {
   SubCategory,
   Favourite,
   DeleteButton,
-  DummyScreen 
+  DummyScreen,
+  MyActiveOrder
 }

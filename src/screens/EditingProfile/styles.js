@@ -1,38 +1,30 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors, scale } from '../../utils';
 
-const { height } = Dimensions.get('window');
-
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.white,
   },
-  scrollContent: {
+  keyboardView: {
+    flex: 1,
+  },
+  scrollView: {
+    flexGrow: 1,
+    alignItems: 'center',
     padding: 20,
-    alignItems: 'center',
   },
-  header: {
-    marginBottom: 30,
-    alignItems: 'center',
-  },
-  backButton: {
-    position: 'absolute',
-    left: 0,
-    top: 10,
-  },
-  headerTitle: {
+  profileTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#000',
-    marginTop: scale(70),
-  },
-  headerSubtitle: {
-    fontSize: 18,
-    color: '#777',
+    marginVertical: 10,
     textAlign: 'center',
-    marginTop: 10,
-    marginTop: scale(0),
+  },
+  profileSubtitle: {
+    fontSize: 14,
+    color: colors.fontThirdColor,
+    textAlign: 'center',
+    marginBottom: 20,
   },
   profileImageContainer: {
     marginBottom: 30,
@@ -42,24 +34,24 @@ export default StyleSheet.create({
     width: 100, // Set fixed width and height for the circle
     height: 100,
     borderRadius: 50, // Makes it circular
-    backgroundColor: '#f0f0f0', // Light gray background
-    shadowColor: '#000', // Shadow color
+    backgroundColor: colors.grayLinesColor, // Light gray background
+    shadowColor: colors.black, // Shadow color
     shadowOffset: { width: 0, height: 2 }, // Shadow offset
     shadowOpacity: 0.2, // Shadow opacity
     shadowRadius: 4, // Shadow blur
     elevation: 5, // Adds shadow for Android
   },
-  
+
   profileImage: {
     fontSize: 64, // Font size for the icon
     color: colors.darkGrayText, // Gray color for the user icon
   },
-  
+
   editIcon: {
     position: 'absolute',
     bottom: -5,
     right: -7,
-    backgroundColor: '#4CAF50',
+    backgroundColor: colors.greenColor,
     borderRadius: 20,
     padding: 5,
   },
@@ -78,39 +70,39 @@ export default StyleSheet.create({
     width: '100%',
     padding: 12,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: colors.grayLinesColor,
     borderRadius: 8,
     marginBottom: 20,
-    height: scale(40),
+    height: scale(45),
   },
   phoneContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: colors.grayLinesColor,
     borderRadius: 8,
     marginBottom: 20,
-    height: scale(40),
+    height: scale(45),
   },
   countryCode: {
     paddingHorizontal: 12,
     borderRightWidth: 1,
-    borderRightColor: '#ccc',
+    borderRightColor: colors.fontSecondColor,
     fontSize: 14,
-    color: '#777',
+    color: colors.fontMainColor,
   },
   phoneInput: {
     flex: 1,
     paddingHorizontal: 12,
     fontSize: 14,
-    color: '#000',
+    color: colors.fontMainColor,
   },
   dropdownText: {
     fontSize: 14,
-    color: '#777',
+    color: colors.fontMainColor,
   },
   mainButton: {
-    backgroundColor: '#01AC66', // Customize the button color
+    backgroundColor: colors.greenColor, // Customize the button color
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 8,
@@ -123,13 +115,13 @@ export default StyleSheet.create({
   mainButtonText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#FFFFFF', // White text
+    color: colors.white, // White text
   },
   dropdownList: {
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: colors.grayLinesColor,
     borderRadius: 4,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     marginTop: 5,
     position: 'absolute',
     width: '100%',
@@ -140,11 +132,11 @@ export default StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    borderBottomColor: colors.grayLinesColor,
   },
   dropdownItemText: {
     fontSize: 16,
-    color: '#00000',
+    color: colors.fontMainColor,
   },
   dropdown: {
     flexDirection: 'row',
@@ -155,10 +147,26 @@ export default StyleSheet.create({
     borderRadius: 4,
     padding: 10,
     marginBottom: 15,
-    backgroundColor: '#fff',
-    height: scale(40),
+    backgroundColor: colors.white,
+    height: scale(45),
   },
-  
-  
-  
+  errorText: {
+    fontSize: 12,
+    color: 'red',
+    marginBottom: 10,
+  },
+  completeProfileButton: {
+    width: '100%',
+    backgroundColor: colors.greenColor,
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
+
+export default styles;

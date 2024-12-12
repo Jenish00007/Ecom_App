@@ -9,7 +9,7 @@ const UPDATEUSER = gql`
   ${updateUser}
 `
 import { TextDefault, BackHeader, BottomTab } from '../../components'
-import { alignment } from '../../utils'
+import { alignment, colors } from '../../utils'
 import { View, TouchableOpacity } from 'react-native'
 function DeleteButton(props) {
   const navigation = useNavigation()
@@ -57,7 +57,7 @@ function DeleteButton(props) {
             logout()
             navigation.navigate('MainLanding')
           }}>
-          <TextDefault center bold style={{ color: 'white' }}>
+          <TextDefault center bold style={{ color: 'white'}}>
             Delete Account
           </TextDefault>
         </TouchableOpacity>

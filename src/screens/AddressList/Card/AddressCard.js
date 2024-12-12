@@ -1,39 +1,63 @@
-import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
-import styles from './styles'
-import { colors, scale } from '../../../utils'
-import { TextDefault } from '../../../components/Text'
-import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
-import MainBtn from '../../../ui/Buttons/MainBtn'
-import { useMutation, gql } from '@apollo/client'
-import { deleteAddress, selectAddress } from '../../../apollo/server'
+import React from 'react';
+import { View, TouchableOpacity } from 'react-native';
+import styles from './styles';
+import { colors, scale } from '../../../utils';
+import { TextDefault } from '../../../components/Text';
+import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import MainBtn from '../../../ui/Buttons/MainBtn';
+import { useMutation, gql } from '@apollo/client';
+import { deleteAddress, selectAddress } from '../../../apollo/server';
 
+// Define GraphQL mutations
 const DELETE_ADDRESS = gql`
   ${deleteAddress}
-`
+`;
+
 const SELECT_ADDRESS = gql`
   ${selectAddress}
-`
+`;
 
 function Card(props) {
-  console.log('card',props)
-  const navigation = useNavigation()
-  const isDefault = props.default
-  const [mutate, { loading: loadingMutation }] = useMutation(DELETE_ADDRESS)
-  const [
-    mutateSelected,
-    { loading: loadingSelected }
-  ] = useMutation(SELECT_ADDRESS, { onError })
+  const navigation = useNavigation();
+  const { item } = props;
+  const isDefault = item.default;
 
-  function onError(error) {
-    console.log(error)
-  }
-  const onSelectAddress = address => {
-    mutateSelected({ variables: { id: address._id } })
-  }
+  // Mutation to delete address
+  const [mutateDelete, { loading: loadingDelete }] = useMutation(DELETE_ADDRESS, {
+    variables: { id: item._id },
+    update(cache, { data: { deleteAddress } }) {
+      const normalizedId = cache.identify({ id: item._id, __typename: 'Address' });
+      cache.evict({ id: normalizedId });
+      cache.gc();
+    },
+    onError(error) {
+      console.error('Error deleting address:', error);
+      if (error.networkError) {
+        console.error('Network error:', error.networkError);
+      }
+      if (error.graphQLErrors.length) {
+        console.error('GraphQL errors:', error.graphQLErrors);
+      }
+    },
+  });
 
-  function renderSelectedButton() {
+  // Mutation to select address as default
+  const [mutateSelect, { loading: loadingSelect }] = useMutation(SELECT_ADDRESS, {
+    onError(error) {
+      console.log('Error selecting address:', error);
+    },
+  });
+
+  const handleSelectAddress = (address) => {
+    mutateSelect({ variables: { id: address._id } });
+  };
+
+  const handleDeleteAddress = () => {
+    mutateDelete();
+  };
+
+  const renderSelectedButton = () => {
     return (
       <TouchableOpacity activeOpacity={0} style={styles.selectedBtn}>
         <View style={styles.tickImage}>
@@ -43,85 +67,70 @@ function Card(props) {
           {'My Default Address'}
         </TextDefault>
       </TouchableOpacity>
-    )
-  }
+    );
+  };
 
-  function renderUnselectedButton() {
+  const renderUnselectedButton = () => {
     return (
       <MainBtn
-        loading={loadingSelected}
-        onPress={() => {
-          onSelectAddress(props.item)
-        }}
+        loading={loadingSelect}
+        onPress={() => handleSelectAddress(item)}
         text="Mark it as Default Address"
       />
-    )
-  }
+    );
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.headerRow}>
-        <TextDefault textColor={colors.fontBrown} H4>
-          {' '}
-          {props.item.label}
-        </TextDefault>
+        {/* Location Icon */}
+        <View style={styles.iconWithLabel}>
+  <Feather name="map-pin" size={scale(25)} color={colors.greenColor} style={styles.icon} />
+  <TextDefault textColor={colors.fontMainColor} H4 style={styles.label}>
+    {item.label}
+  </TextDefault>
+</View>
+
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity
             style={styles.icon}
-            activeOpacity={0}
-            onPress={() =>
-              navigation.navigate('EditAddress', { ...props.item })
-            }>
-            <Feather
-              name="edit"
-              size={scale(18)}
-              color={colors.fontThirdColor}
-            />
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate('EditAddress', { ...item })}
+          >
+            <Feather name="edit" size={scale(18)} color={colors.fontThirdColor} />
           </TouchableOpacity>
           <TouchableOpacity
-            disabled={loadingMutation}
+            disabled={loadingDelete}
             style={styles.icon}
-            onPress={() => {
-              mutate({ variables: { id: props.item._id } })
-            }}>
-            {!loadingMutation ? (
-              <Feather
-                name="trash-2"
-                size={scale(18)}
-                color={colors.fontThirdColor}
-              />
+            onPress={handleDeleteAddress}
+          >
+            {!loadingDelete ? (
+              <Feather name="trash-2" size={scale(18)} color={colors.fontThirdColor} />
             ) : (
-              <MaterialCommunityIcons
-                name="dots-horizontal"
-                size={scale(18)}
-                color={colors.fontThirdColor}
-              />
+              <MaterialCommunityIcons name="dots-horizontal" size={scale(18)} color={colors.fontThirdColor} />
             )}
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.address}>
-        <TextDefault textColor={colors.fontMainColor}>
-          {props.item.region}
-        </TextDefault>
-        <TextDefault textColor={colors.fontMainColor}>
-          {props.item.city}
-        </TextDefault>
-        <TextDefault textColor={colors.fontMainColor}>
-          {props.item.apartment}
-          {', '}
-          {props.item.building}
-        </TextDefault>
 
+      {/* Address Details */}
+      <View style={styles.address}>
+        <TextDefault textColor={colors.fontMainColor}>{item.region}</TextDefault>
+        <TextDefault textColor={colors.fontMainColor}>{item.city}</TextDefault>
         <TextDefault textColor={colors.fontMainColor}>
-          Details: {props.item.details ?? 'None'}
+          {item.apartment}, {item.building}
+        </TextDefault>
+        <TextDefault textColor={colors.fontMainColor}>
+          Details: {item.details ?? 'None'}
         </TextDefault>
       </View>
+
+      {/* Action Buttons */}
       <View style={styles.btnContainer}>
         {isDefault ? renderSelectedButton() : renderUnselectedButton()}
       </View>
     </View>
-  )
+  );
 }
 
-export default Card
+export default Card;

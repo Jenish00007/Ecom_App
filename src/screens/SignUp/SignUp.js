@@ -90,24 +90,24 @@ function SignUp(props) {
       setPasswordError('Password is required');
       result = false;
     }
-    const phoneRegex = /^\d{11,15}$/;
-    if (!phoneRegex.test(phone)) {
-      setPhoneError('Provide a valid phone number');
-      result = false;
-    }
+    // const phoneRegex = /^\d{11,15}$/;
+    // if (!phoneRegex.test(phone)) {
+    //   setPhoneError('Provide a valid phone number');
+    //   result = false;
+    // }
     const nameRegex = /([a-zA-Z]{3,30}\s*)+/;
     if (!nameRegex.test(fullname)) {
       setNameError('Full name is required');
       result = false;
     }
-    if (!agree) {
-      FlashMessage({
-        message: 'You must agree to the terms and conditions.',
-        type: 'warning',
-        position: 'top',
-      });
-      result = false;
-    }
+    // if (!agree) {
+    //   FlashMessage({
+    //     message: 'You must agree to the terms and conditions.',
+    //     type: 'warning',
+    //     position: 'top',
+    //   });
+    //   result = false;
+    // }
 
     return result;
   }
@@ -219,19 +219,19 @@ function SignUp(props) {
                     style={styles.checkbox}
                     tintColors={{ true: '#01AC66', false: '#ddd' }}
                   /> */}
-                  <TextDefault>
+                  {/* <TextDefault>
                     Agree with{' '}
                     <TextDefault
                       style={styles.ftTextUnderline}
                       onPress={() => navigation.navigate('Terms')}>
                       Terms & Conditions
                     </TextDefault>
-                  </TextDefault>
+                  </TextDefault> */}
                 </View>
 
                 <MainBtn
                   loading={loading}
-                  onPress={() => {
+                  onPress={async() => {
                     if (validateCredentials()) {
                       const user = {
                         phone: phone.trim(),

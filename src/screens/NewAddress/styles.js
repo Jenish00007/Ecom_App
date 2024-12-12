@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   formMainContainer: {
     flex: 1,
-    backgroundColor: colors.themeBackground,
+    backgroundColor: colors.white,
     alignItems: 'center'
   },
   formContainer: {
@@ -43,7 +43,15 @@ const styles = StyleSheet.create({
     ...alignment.MBmedium,
     ...alignment.PLsmall,
     ...alignment.PRsmall,
-    ...alignment.PBlarge
+    ...alignment.PBlarge,
+    borderWidth: 1,
+    borderColor: colors.grayLinesColor,
+    shadowColor: colors.black,
+    shadowRadius: 8,
+    shadowOpacity: 0.3,
+    shadowOffset: {width: 0, height: 4},
+    elevation: 6
+
   },
   twoItemsContainer: {
     width: '100%',
@@ -51,22 +59,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    ...alignment.MBxSmall
+    ...alignment.MBxSmall,
   },
   halfContainer: {
     width: '45%',
-    height: '90%'
+    height: '90%',
+    
   },
   labelContainer: {
     width: '100%',
-    height: '40%'
+    height: '40%',
   },
   inputContainer: {
     width: '100%',
     height: '60%',
     borderRadius: scale(3),
     justifyContent: 'center',
-    backgroundColor: colors.themeBackground
+    backgroundColor: colors.themeBackground,
   },
   oneItemContainer: {
     width: '100%',
@@ -93,7 +102,7 @@ const styles = StyleSheet.create({
   },
   addressInputStyle: {
     ...textStyles.Regular,
-    ...textStyles.H2,
+    ...textStyles.H3,
     color: colors.fontBrown
   },
   titleBorder: {

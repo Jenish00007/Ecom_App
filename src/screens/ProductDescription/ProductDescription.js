@@ -17,30 +17,39 @@ import { colors, alignment, scale } from '../../utils'
 import { MaterialIcons } from '@expo/vector-icons'
 import UserContext from '../../context/User'
 import ConfigurationContext from '../../context/Configuration'
-import { useQuery, gql } from '@apollo/client'
-import { productReviews } from '../../apollo/server'
+import { useQuery, useMutation, gql } from '@apollo/client';
+import { productReviews} from '../../apollo/server';
 import ImageViewer from 'react-native-image-zoom-viewer'
+import { addToWhishlist } from '../../apollo/server';
+
+
+const ADD_TO_WHISHLIST= gql`
+  ${addToWhishlist}
+`
 
 const REVIEWS = gql`
   ${productReviews}
 `
 
 function ProductDescription(props) {
-  const navigation = useNavigation()
-  const route = useRoute()
-  const [modalShow, modalShowSetter] = useState(false)
-  const [imageIndex, imageIndexSetter] = useState(0)
-  const product = route.params?.product ?? null
-  const { addCartItem } = useContext(UserContext)
-  const configuration = useContext(ConfigurationContext)
-  const [caroselImage, setCaroselImage] = useState(product.image[0] ?? null)
-  const [price, priceSetter] = useState(null)
-  const [stockAvailability, setStockAvailability] = useState(false)
-  const [attributes, attributeSetter] = useState([])
-  const [kgCount, setKgCount] = useState(1); // New state for KG count
+  const navigation = useNavigation();
+  const route = useRoute();
+  const [modalShow, modalShowSetter] = useState(false);
+  const [imageIndex, imageIndexSetter] = useState(0);
+  const product = route.params?.product ?? null;
+  const { addCartItem, isLoggedIn, profile } = useContext(UserContext);
+  const configuration = useContext(ConfigurationContext);
+  const [carouselImage, setCarouselImage] = useState(product.image[0] ?? null);
+  const [price, priceSetter] = useState(null);
+  const [stockAvailability, setStockAvailability] = useState(false);
+  const [attributes, attributeSetter] = useState([]);
+  const [kgCount, setKgCount] = useState(1);
+  const [liked, setLiked] = useState(false); // Like state
+  const [mutate, { loading: loadingMutation }] = useMutation(ADD_TO_WHISHLIST);
+
   const { data, loading, error } = useQuery(REVIEWS, {
-    variables: { productId: product._id }
-  })
+    variables: { productId: product._id },
+  });
   const zoomImages = product?.image.map(item => {
     return { url: item }
   })
@@ -58,6 +67,31 @@ function ProductDescription(props) {
       setKgCount((prev) => prev - 1);
     }
   };
+
+
+  const toggleLike = async () => {
+    if (!isLoggedIn) {
+      FlashMessage({ message: 'Please login to like products' });
+      return;
+    }
+
+    try {
+      const response = await mutate({
+        variables: { productId: product._id, userId: profile._id },
+      });
+      if (response?.data?.addToWhishlist?.success) {
+        setLiked((prev) => !prev); // Toggle like
+        FlashMessage({
+          message: liked ? 'Removed from Whishlist' : 'Added to Whishlist',
+        });
+      } else {
+        FlashMessage({ message: 'Something went wrong. Try again!' });
+      }
+    } catch (err) {
+      FlashMessage({ message: err.message });
+    }
+  };
+
 
 
 
@@ -123,20 +157,16 @@ function ProductDescription(props) {
           <View style={styles.caroselContainer}>
             <View style={styles.caroselSubContainer}>
 
-              {/* Like Container */}
-    <TouchableOpacity
-      style={styles.likeContainer}
-      onPress={() => {
-        // Add logic for liking the product here
-        console.log('Product liked!');
-      }}
-    >
-      <MaterialIcons
-        name="favorite-border" // Use "favorite" for a filled heart
-        size={scale(20)} // Adjust size as needed
-        color={colors.black} // Use the desired color
-      />
-    </TouchableOpacity>
+             {/* Like Container */}
+             <TouchableOpacity
+                style={styles.likeContainer}
+                onPress={toggleLike}>
+                <MaterialIcons
+                  name={liked ? 'favorite' : 'favorite-border'}
+                  size={scale(20)}
+                  color={liked ? colors.red : colors.black}
+                />
+              </TouchableOpacity>
               
             </View>
           </View>
@@ -145,7 +175,7 @@ function ProductDescription(props) {
             onPress={() => modalShowSetter(true)}
             style={styles.caroselMainImgCnt}>
             <Image
-              source={product && { uri: caroselImage }}
+              source={product && { uri: carouselImage }}
               resizeMode="cover"
               style={styles.imgResponsive}
             />

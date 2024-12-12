@@ -67,7 +67,7 @@ function ProductCard(props) {
       <Ionicons
         name={liked ? 'ios-heart-sharp' : 'ios-heart-outline'}
         size={scale(20)}
-        color='#01AC66'
+        color={colors.greenColor}
     
       />
     </TouchableOpacity>

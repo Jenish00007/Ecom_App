@@ -37,9 +37,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     borderRadius: scale(10),
     borderWidth: 1, // Adjust this value to increase the border thickness
-    borderColor: '#D3D3D3', // Choose the border color (e.g., Dark Gray)
+    borderColor: colors.grayLinesColor, // Choose the border color (e.g., Dark Gray)
     // Shadow for both Android and iOS
-    shadowColor: '#D3D3D3',  // Dark gray shadow color
+    shadowColor: colors.grayLinesColor,  // Dark gray shadow color
     shadowOffset: { width: 0, height: 4 },  // Shadow offset
     shadowOpacity: 0.3,  // Shadow opacity (higher value = more visible shadow)
     shadowRadius: 6,  // Radius of the shadow blur

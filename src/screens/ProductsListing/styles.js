@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.headerbackground
   },
   container: {
-    backgroundColor: colors.themeBackground
+    backgroundColor: colors.white
   },
   categoryContainer: {
     flexGrow: 1,
@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
     ...alignment.MTlarge
   },
   productCard: {
-    marginRight: width * 0.1,
+    marginRight: width * 0.08,
     height: scale(230),
     width: width * 0.4,
-    ...alignment.MBlarge
+    ...alignment.MBlarge,
   },
   subContainerImage: {
     flex: 1,

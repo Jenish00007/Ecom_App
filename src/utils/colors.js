@@ -42,8 +42,12 @@ export const colors = {
   pinkColor: '#F48B98',
   textBlueColor: '#6178DE',
   greenTextColor: '#8CB65E',
+  yellow: '#FFFF00',
+  lightyellow: '#FFFFE0',
+  lightblue: '#ADD8E6',
   // many shades of gray
   backgroudGray: '#F7F7F7',
   darkGrayText: '#9B9B9B',
   grayLinesColor: '#EAEAEA'
+  
 }

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   formMainContainer: {
     flex: 1,
-    backgroundColor: colors.themeBackground,
+    backgroundColor: colors.white,
     alignItems: 'center'
   },
   formContainer: {
@@ -26,7 +26,9 @@ const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
-    ...alignment.PBmedium
+    ...alignment.PBmedium,
+    
+
   },
   imgResponsive: {
     width: '60%',
@@ -40,7 +42,15 @@ const styles = StyleSheet.create({
     ...alignment.MBmedium,
     ...alignment.PLsmall,
     ...alignment.PRsmall,
-    ...alignment.PBlarge
+    ...alignment.PBlarge,
+    borderWidth: 1,
+    borderColor: colors.grayLinesColor,
+    shadowColor: colors.black,
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    shadowOffset: {width: 0, height: 4},
+    elevation: 6
+
   },
   twoItemsContainer: {
     width: '100%',
@@ -89,7 +99,7 @@ const styles = StyleSheet.create({
   },
   addressInputStyle: {
     ...textStyles.Regular,
-    ...textStyles.H2,
+    ...textStyles.H3,
     color: colors.fontBrown
   },
   titleBorder: {
