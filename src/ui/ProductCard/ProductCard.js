@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { View, Image, TouchableOpacity } from 'react-native'
+import { View, Image, TouchableOpacity, FlatList } from 'react-native'
 import styles from './styles'
 import { gql, useMutation } from '@apollo/client'
 import { addToWhishlist } from '../../apollo/server'
@@ -18,6 +18,7 @@ function ProductCard(props) {
   const { isLoggedIn, profile } = useContext(UserContext)
   const [liked, setLiked] = useState(false)
   const [mutate, { loading: loadingMutation }] = useMutation(ADD_TO_WHISHLIST)
+
   useEffect(() => {
     if (isLoggedIn) {
       setLiked(
@@ -29,6 +30,12 @@ function ProductCard(props) {
       setLiked(false)
     }
   }, [profile, isLoggedIn])
+
+  const dummyData = [
+   
+    
+  ];
+
   return (
     <TouchableOpacity
       disabled={loadingMutation}
@@ -37,105 +44,87 @@ function ProductCard(props) {
         navigation.navigate('ProductDescription', { product: props })
       }
       style={[styles.cardContainer, props.styles]}>
+      
+      {/* Multiple Images Carousel */}
       <View style={styles.topCardContainer}>
-        <Image
-          source={{ uri: props.image[0] }}
-          defaultSource={require('../../assets/images/formBackground.png')}
-          resizeMode="cover"
-          style={styles.imgResponsive}
+        <FlatList
+          data={props.image} // Assuming props.image is an array of image URLs
+          horizontal
+          renderItem={({ item }) => (
+            <Image
+              source={{ uri: item }}
+              style={styles.imgResponsive}
+              resizeMode="cover"
+            />
+          )}
+          keyExtractor={(item, index) => index.toString()}
+          showsHorizontalScrollIndicator={false}
         />
-        <View style={styles.offerContainer}>
-    <TextDefault textColor={colors.white} style={styles.offerText}bold small>35% OFF</TextDefault>
-  </View>
+
         <View style={styles.likeContainer}>
-    <TouchableOpacity
-      disabled={loadingMutation}
-      activeOpacity={0}
-      onPress={() => {
-        if (isLoggedIn) {
-          mutate({
-            variables: {
-              productId: props._id
-            }
-          });
-          setLiked((prev) => !prev);
-        } else {
-          navigation.navigate('SignIn');
-        }
-      }}
-    >
-      <Ionicons
-        name={liked ? 'ios-heart-sharp' : 'ios-heart-outline'}
-        size={scale(20)}
-        color={colors.greenColor}
-    
-      />
-    </TouchableOpacity>
-  </View>
+          <TouchableOpacity
+            disabled={loadingMutation}
+            activeOpacity={0.7}
+            onPress={() => {
+              if (isLoggedIn) {
+                mutate({
+                  variables: {
+                    productId: props._id
+                  }
+                });
+                setLiked((prev) => !prev);
+              } else {
+                navigation.navigate('SignIn');
+              }
+            }}
+          >
+            <Ionicons
+              name={liked ? 'ios-bookmark' : 'ios-bookmark-outline'}
+              size={scale(20)}
+              color={colors.greenColor}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
+
+      {/* Product Info Section */}
       <View style={styles.botCardContainer}>
         <View style={styles.botSubCardContainer}>
-          <View>
-            <TextDefault numberOfLines={1} textColor={colors.fontMainColor}>
-              {props.title}
-            </TextDefault>
-            <View style={styles.priceContainer}>
-              <TextDefault
-                style={{ maxWidth: '70%' }}
-                numberOfLines={1}
-                textColor={colors.fontSecondColor}
-                small>
-                {props.subCategory.title}
-              </TextDefault>
-              <View style={styles.ratingContainer}>
-                {/* <View style={{ alignSelf: 'center', height: '80%' }}>
-                  <Ionicons name="md-star" size={scale(11)} color="#4165b9" />
-                </View> */}
-                {/* <TextDefault
-                  textColor={colors.fontSecondColor}
-                  style={{ marginLeft: 2 }}>
-                  {props.reviewData.ratings}
-                </TextDefault> */}
-                {/* <TextDefault
-                  textColor={colors.fontSecondColor}
-                  style={{ marginLeft: 2 }}
-                  small>
-                  {`( ${props.reviewData.total} )`}
-                </TextDefault> */}
-              </View>
-            </View>
-          </View>
+          <TextDefault numberOfLines={1} textColor={colors.fontMainColor}>
+            {props.title}
+          </TextDefault>
+          
           <View style={styles.priceContainer}>
-            <TextDefault
-              style={{ maxWidth: '75%' }}
+            {/* <TextDefault
+              style={{ maxWidth: '70%' }}
               numberOfLines={1}
-              textColor={colors.greenColor}>
-              ${props.price.toFixed(2)}
-            </TextDefault>
-            <View style={[styles.aboutRestaurant]}>
-              {/* <TouchableOpacity
-                disabled={loadingMutation}
-                activeOpacity={0}
-                onPress={() => {
-                  if (isLoggedIn) {
-                    mutate({
-                      variables: {
-                        productId: props._id
-                      }
-                    })
-                    setLiked(prev => !prev)
-                  } else {
-                    navigation.navigate('SignIn')
-                  }
-                }}
-                style={styles.likeContainer}>
-                <Ionicons
-                  name={liked ? 'ios-heart-sharp' : 'ios-heart-outline'}
-                  size={scale(18)}
-                />
-              </TouchableOpacity> */}
+              textColor={colors.fontSecondColor}
+              small>
+              {props.subCategory.title}
+            </TextDefault> */}
+            <View style={styles.ratingContainer}>
+              {/* <TextDefault
+                textColor={colors.fontSecondColor}
+                style={{ marginLeft: 2 }}
+                small>
+                {`${props.reviewData.total} `}
+              </TextDefault> */}
             </View>
           </View>
+        </View>
+
+        {/* Dummy List Section */}
+        <View style={styles.priceContainer}>
+          <FlatList
+            data={dummyData}
+            renderItem={({ item }) => (
+              <View style={styles.listItem}>
+                <TextDefault textColor={colors.fontMainColor}>{item.title}</TextDefault>
+              </View>
+            )}
+            keyExtractor={item => item.id}
+            
+          />
         </View>
       </View>
     </TouchableOpacity>

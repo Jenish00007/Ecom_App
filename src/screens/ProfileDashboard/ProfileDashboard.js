@@ -51,7 +51,7 @@ function ProfileDashboard(props) {
         </View>
         {/* <CardContainer /> */}
       </ScrollView>
-      <BottomTab screen="PROFILE" />
+     <View style={{height:200,backgroundColor:'white'}}></View>
     </SafeAreaView>
   );
 }

@@ -176,6 +176,15 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end', // Aligns text to the right
     marginTop: scale(9), // If you want a bit of space above
   },
+  locationImage: {
+    width: 34,  // Adjust width
+    height: 34, // Adjust height
+    marginRight: 8, // Space between image and text
+  },
+  locationText: {
+    fontSize: 16,  // Adjust text size
+    color: '#333',  // Adjust text color
+  },
   
   seeAllText: {
     textAlign: 'right', // Align the text itself to the right

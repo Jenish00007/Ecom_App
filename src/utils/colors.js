@@ -1,4 +1,5 @@
 export const colors = {
+  Zipsii_color:'A60F93',
   black: '#000',
   white: '#FFF',
   themeBackground: '#F7F7F7',
@@ -36,7 +37,7 @@ export const colors = {
   brownColor: '#D0AD8A',
   blueColor: '#2962FF',
   secondaryWhiteColor: '#fff',
-  greenColor: '#01AC66',
+  greenColor: '#A60F93',
   lightGreen: '#90EE90',
   lightBlueColor: '#6178DE',
   pinkColor: '#F48B98',

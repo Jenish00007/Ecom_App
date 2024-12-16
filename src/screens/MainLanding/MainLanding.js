@@ -12,7 +12,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { gql, useQuery } from '@apollo/client';
 import { categories, produccts } from '../../apollo/server';
-import { TextInput } from 'react-native'; // Add this to your imports
+import { TextInput,Image } from 'react-native'; // Add this to your imports
 
 const caroselImage = [
   require('../../assets/images/MainLanding/slide1.jpg'),
@@ -81,95 +81,115 @@ function MainLanding(props) {
   function renderHeader() {
     return (
       <>
-      {/* Location and Notifications Row */}
-      <View style={styles.headerContainer}>
-        {/* Column Layout for Location */}
-        <View style={styles.locationWrapper}>
-          {/* Add "Location" Text Above */}
-          <TextDefault style={styles.locationLabel}>Location</TextDefault>
+        {/* Location and Notifications Row */}
+        <View style={styles.headerContainer}>
+          {/* Column Layout for Location */}
+          <View style={styles.locationWrapper}>
+            {/* Add "Location" Text Above */}
+            {/* <TextDefault style={styles.locationLabel}>Location</TextDefault> */}
 
-          {/* Location Row */}
-          <View style={styles.locationContainer}>
-            <MaterialIcons name="location-on" size={24} color="#01AC66" />
-            <TextDefault style={styles.locationText}>New York, USA</TextDefault>
-            <TouchableOpacity>
-              <MaterialIcons name="keyboard-arrow-down" size={20} color="#000" />
-            </TouchableOpacity>
+            {/* Location Row */}
+            <View style={styles.locationContainer}>
+              {/* Replace Icon with Image */}
+              <Image
+                source={require('../../assets/zipsii.png')}  // Your image file
+                style={styles.locationImage}  // Style the image appropriately
+              />
+              <TextDefault style={styles.locationText} H5 bold>Zypsii</TextDefault>
+            </View>
+
           </View>
+          {/* <TouchableOpacity
+            onPress={() => alert('Notifications clicked')}
+            style={styles.notificationIconWrapper}
+          >
+          <MaterialIcons
+              name="search"
+              size={28}
+              color="#000"
+              style={styles.notificationIcon}
+            />
+               </TouchableOpacity> */}
+          {/* Notifications Icon */}
+          <TouchableOpacity
+            onPress={() => alert('Notifications clicked')}
+            style={styles.notificationIconWrapper}
+          >
+            <MaterialIcons
+              name="notifications-none"
+              size={28}
+              color="#000"
+              style={styles.notificationIcon}
+            />
+            
+          </TouchableOpacity>
         </View>
 
-        {/* Notifications Icon */}
-        <TouchableOpacity
-          onPress={() => alert('Notifications clicked')}
-          style={styles.notificationIconWrapper}
+        {/* Search Bar */}
+        {/* <TouchableOpacity
+          style={styles.searchContainer}
+          onPress={() => navigation.navigate('SearchResult')} // Navigate to SearchResult
+          activeOpacity={0.7} // Optional: Add a slight opacity effect on press
         >
-          <MaterialIcons
-            name="notifications-none"
-            size={28}
-            color="#000"
-            style={styles.notificationIcon}
+          <MaterialIcons name="search" size={24} color="#A0A0A0" />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search Food, Drinks, etc"
+            placeholderTextColor="#A0A0A0"
+            editable={false} // Disable editing as the entire container is clickable
+            pointerEvents="none" // Ensure TextInput doesn't intercept the touch event
           />
-        </TouchableOpacity>
-      </View>
-
-{/* Search Bar */}
-<TouchableOpacity 
-  style={styles.searchContainer} 
-  onPress={() => navigation.navigate('SearchResult')} // Navigate to SearchResult
-  activeOpacity={0.7} // Optional: Add a slight opacity effect on press
->
-  <MaterialIcons name="search" size={24} color="#A0A0A0" />
-  <TextInput
-    style={styles.searchInput}
-    placeholder="Search Food, Drinks, etc"
-    placeholderTextColor="#A0A0A0"
-    editable={false} // Disable editing as the entire container is clickable
-    pointerEvents="none" // Ensure TextInput doesn't intercept the touch event
-  />
-  <TouchableOpacity>
-    <MaterialIcons name="tune" size={24} color="#008000" />
-  </TouchableOpacity>
-</TouchableOpacity>
+          <TouchableOpacity>
+            <MaterialIcons name="tune" size={24} color="#008000" />
+          </TouchableOpacity>
+        </TouchableOpacity> */}
 
 
 
+        <View style={{ padding: 50 }}>
+          <TextDefault>Work going on</TextDefault>
+        </View>
 
-
-        {renderCarosel()}
+        {/* {renderCarosel()} */}
         {/* Scrollable Category Row */}
         <View style={styles.titleSpacer}>
-  <TextDefault textColor={colors.fontMainColor} H4 bold >
-    {'Category'}
-  </TextDefault>
-  <View style={styles.seeAllTextContainer}>
-    <TouchableOpacity onPress={() => navigation.navigate('Category')}>
-      <TextDefault textColor={colors.greenColor}H4 bold style={styles.seeAllText}>See All</TextDefault>
-    </TouchableOpacity>
-  </View>
+          <TextDefault textColor={colors.fontMainColor} H5 bold >
+            {'Discover by Intrest'}
+          </TextDefault>
+          <View style={styles.seeAllTextContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate('Category')}>
+              <TextDefault textColor={colors.greenColor} H5  style={styles.seeAllText}>View All</TextDefault>
+            </TouchableOpacity>
+          </View>
 
-  {/* Horizontal Scrollable FlatList for Icon Containers */}
-  <FlatList
-    horizontal
-    showsHorizontalScrollIndicator={false}
-    keyExtractor={(item, index) => index.toString()}
-    data={categoryData?.categories?.slice(0, 8) || []} // Ensure you limit to 8 categories
-    renderItem={({ item }) => (
-      <CategoryCard
-        id={item._id}
-        icon={require('../../assets/dummy-image.png')} // Replace with dynamic icon if available
-        cardLabel={item.title} // Pass the category name as `cardLabel`
-        style={styles.categoryWrapper}
-      />
-    )}
-  />
-</View>
+          {/* Horizontal Scrollable FlatList for Icon Containers */}
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item, index) => index.toString()}
+            data={categoryData?.categories?.slice(0, 8) || []} // Ensure you limit to 8 categories
+            renderItem={({ item }) => (
+              <CategoryCard
+                id={item._id}
+                icon={require('../../assets/dummy-image.png')} // Replace with dynamic icon if available
+                cardLabel={item.title} // Pass the category name as `cardLabel`
+                style={styles.categoryWrapper}
+              />
+            )}
+          />
+        </View>
 
 
         {Featured.length > 0 && (
           <View style={styles.titleSpacer}>
-            <TextDefault textColor={colors.fontMainColor} H4>
-              {'Featured'}
+            <TextDefault textColor={colors.fontMainColor} H5 bold >
+              {'Best Destination'}
             </TextDefault>
+            <View style={styles.seeAllTextContainer}>
+              <TouchableOpacity onPress={() => navigation.navigate('Category')}>
+                <TextDefault textColor={colors.greenColor} H5  style={styles.seeAllText}>View All</TextDefault>
+              </TouchableOpacity>
+            </View>
             <FlatList
               horizontal={true}
               showsHorizontalScrollIndicator={false}
@@ -185,7 +205,7 @@ function MainLanding(props) {
         )}
         <View style={styles.titleSpacer}>
           <TextDefault textColor={colors.fontMainColor} H4>
-            {'All Items'}
+            {'All Destination'}
           </TextDefault>
         </View>
       </>

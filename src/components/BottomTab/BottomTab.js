@@ -3,9 +3,10 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; // Remove SimpleLineIcons as it's no longer needed for these icons
 import styles from './styles';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import UserContext from '../../context/User';
 import { scale, colors } from '../../utils';
-
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 function BottomTab({ screen }) {
   const navigation = useNavigation();
   const { isLoggedIn, cartCount, orders } = useContext(UserContext);
@@ -39,8 +40,8 @@ function BottomTab({ screen }) {
         style={styles.footerBtnContainer}
       >
         <View style={styles.imgContainer}>
-          <MaterialCommunityIcons
-            name="cart" // Solid green icon
+          <SimpleLineIcons
+            name="location-pin" // Solid green icon
             size={scale(20)}
             color={getIconColor('CART')}
           />
@@ -50,11 +51,11 @@ function BottomTab({ screen }) {
             </View>
           )}
         </View>
-        <Text style={getTextStyle('CART')}>My Cart</Text>
+        <Text style={getTextStyle('CART')}>Where To Go</Text>
       </TouchableOpacity>
 
       {/* Favourites Icon */}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => navigation.navigate('Favourite')}
         style={styles.footerBtnContainer}
       >
@@ -64,19 +65,22 @@ function BottomTab({ screen }) {
           color={getIconColor('FAVOURITES')}
         />
         <Text style={getTextStyle('FAVOURITES')}>Favourite</Text>
+      </TouchableOpacity> */}
+ <TouchableOpacity style={styles.iconContainer}>
+        <MaterialCommunityIcons name="hexagon-outline" size={scale(20)} color="#000" />
+        <Text style={getTextStyle('CART')}>Upload</Text>
       </TouchableOpacity>
-
       {/* My Orders Icon */}
       <TouchableOpacity
-        onPress={() => navigation.navigate('MyActiveOrder')}
+        onPress={() => navigation.navigate('Chat')}
         style={styles.footerBtnContainer}
       >
-        <MaterialCommunityIcons
-          name="clipboard-text"
+        <FontAwesome5
+          name="comment-dots"
           size={scale(20)}
           color={getIconColor('ORDERS')}
         />
-        <Text style={getTextStyle('ORDERS')}>My Orders</Text>
+        <Text style={getTextStyle('ORDERS')}>Chat</Text>
       </TouchableOpacity>
 
       {/* Profile Icon */}

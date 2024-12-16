@@ -45,12 +45,6 @@ function ProfileContainer(props) {
       <View style={styles.settingsSection} H5>
         {[
   { label: 'Your Profile', icon: 'person-outline', route: 'EditingProfile' },
-  { label: 'Manage Address', icon: 'location-on', route: 'AddressList' },
-  { label: 'Payment Methods', icon: 'credit-card', route: 'PaymentMethods' },
-  { label: 'My Wallet', icon: 'account-balance-wallet', route: 'Wallet' },  // Changed icon name to 'wallet'
-  { label: 'My Coupons', icon: 'tag', route: 'Coupons' },
-  { label: 'My Orders', icon: 'list', route: 'MyActiveOrder' }, 
-  { label: 'Previous Orders', icon: 'history', route: 'PreviousOrders' },
   { label: 'Delete', icon: 'delete', route: 'DeleteButton' },
   { label: 'Favourites', icon: 'star-outline', route: 'Favourite' },
   { label: 'Settings', icon: 'settings', route: 'Settings' },

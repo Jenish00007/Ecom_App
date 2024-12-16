@@ -19,11 +19,11 @@ function CategoryCard(props) {
     >
       <View style={styles.iconContainer}>
         {/* Dummy image will now render inside all iconContainers */}
-        <Image
-          source={require('../../assets/dummy-image.png')}
+        {/* <Image
+          source={require('../../assets/th1.jpeg')}
           style={styles.dummyImage}
-        />
-        <Image source={props.icon} style={styles.icon} />
+        /> */}
+        {/* <Image source={props.icon} style={styles.icon} /> */}
       </View>
       <View style={styles.textContainer}>
         <TextDefault numberOfLines={1} H5>

@@ -66,6 +66,13 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: scale(10),
     fontWeight: 'bold',
+  },iconContainer: {
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25, // Rounded container for the icons.
+   
   },
 });
 
