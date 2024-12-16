@@ -36,14 +36,14 @@ function BottomTab({ screen }) {
 
       {/* Cart Icon */}
       <TouchableOpacity
-        onPress={() => navigation.navigate('ShoppingCart')}
+        onPress={() => navigation.navigate('WhereToGo')}
         style={styles.footerBtnContainer}
       >
         <View style={styles.imgContainer}>
           <SimpleLineIcons
             name="location-pin" // Solid green icon
             size={scale(20)}
-            color={getIconColor('CART')}
+            color={getIconColor('WhereToGo')}
           />
           {cartCount > 0 && (
             <View style={styles.badgeContainer}>
@@ -51,7 +51,7 @@ function BottomTab({ screen }) {
             </View>
           )}
         </View>
-        <Text style={getTextStyle('CART')}>Where To Go</Text>
+        <Text style={getTextStyle('WhereToGo')}>Where To Go</Text>
       </TouchableOpacity>
 
       {/* Favourites Icon */}
@@ -66,9 +66,9 @@ function BottomTab({ screen }) {
         />
         <Text style={getTextStyle('FAVOURITES')}>Favourite</Text>
       </TouchableOpacity> */}
- <TouchableOpacity style={styles.iconContainer}>
+      <TouchableOpacity style={styles.iconContainer}>
         <MaterialCommunityIcons name="hexagon-outline" size={scale(20)} color="#000" />
-        <Text style={getTextStyle('CART')}>Upload</Text>
+        <Text style={getTextStyle('Upload')}>Upload</Text>
       </TouchableOpacity>
       {/* My Orders Icon */}
       <TouchableOpacity
@@ -96,7 +96,7 @@ function BottomTab({ screen }) {
       >
         <View style={styles.profileContainer}>
           <MaterialCommunityIcons
-            name="account-circle" // Solid green icon
+            name="menu"
             size={scale(20)}
             color={getIconColor('PROFILE')}
           />

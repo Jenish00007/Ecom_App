@@ -65,6 +65,7 @@ function noDrawer() {
       {/* Add the MyActiveOrder screen here */}
     <NavigationStack.Screen name="MyActiveOrder" component={Screen.MyActiveOrder} />
     <NavigationStack.Screen name="Chat" component={Screen.Chat} />
+    <NavigationStack.Screen name="WhereToGo" component={Screen.Discoverplace} />
     </NavigationStack.Navigator>
 
     

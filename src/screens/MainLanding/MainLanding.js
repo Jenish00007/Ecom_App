@@ -12,7 +12,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { gql, useQuery } from '@apollo/client';
 import { categories, produccts } from '../../apollo/server';
-import { TextInput,Image } from 'react-native'; // Add this to your imports
+import { TextInput, Image } from 'react-native'; // Add this to your imports
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const caroselImage = [
   require('../../assets/images/MainLanding/slide1.jpg'),
@@ -81,16 +82,9 @@ function MainLanding(props) {
   function renderHeader() {
     return (
       <>
-        {/* Location and Notifications Row */}
         <View style={styles.headerContainer}>
-          {/* Column Layout for Location */}
           <View style={styles.locationWrapper}>
-            {/* Add "Location" Text Above */}
-            {/* <TextDefault style={styles.locationLabel}>Location</TextDefault> */}
-
-            {/* Location Row */}
             <View style={styles.locationContainer}>
-              {/* Replace Icon with Image */}
               <Image
                 source={require('../../assets/zipsii.png')}  // Your image file
                 style={styles.locationImage}  // Style the image appropriately
@@ -99,18 +93,18 @@ function MainLanding(props) {
             </View>
 
           </View>
-          {/* <TouchableOpacity
-            onPress={() => alert('Notifications clicked')}
+          <TouchableOpacity
+            onPress={() => alert('Search clicked')}
             style={styles.notificationIconWrapper}
           >
-          <MaterialIcons
+            <MaterialIcons
               name="search"
               size={28}
               color="#000"
               style={styles.notificationIcon}
+              onPress={() => navigation.navigate('SearchResult')}
             />
-               </TouchableOpacity> */}
-          {/* Notifications Icon */}
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => alert('Notifications clicked')}
             style={styles.notificationIconWrapper}
@@ -121,8 +115,16 @@ function MainLanding(props) {
               color="#000"
               style={styles.notificationIcon}
             />
-            
           </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => alert('Notifications clicked')}
+            style={styles.notificationIconWrapper}
+          >
+              <MaterialCommunityIcons
+                name="account-circle"
+                size={scale(20)}
+              />
+            </TouchableOpacity>
         </View>
 
         {/* Search Bar */}
@@ -158,7 +160,7 @@ function MainLanding(props) {
           </TextDefault>
           <View style={styles.seeAllTextContainer}>
             <TouchableOpacity onPress={() => navigation.navigate('Category')}>
-              <TextDefault textColor={colors.greenColor} H5  style={styles.seeAllText}>View All</TextDefault>
+              <TextDefault textColor={colors.greenColor} H5 style={styles.seeAllText}>View All</TextDefault>
             </TouchableOpacity>
           </View>
 
@@ -187,7 +189,7 @@ function MainLanding(props) {
             </TextDefault>
             <View style={styles.seeAllTextContainer}>
               <TouchableOpacity onPress={() => navigation.navigate('Category')}>
-                <TextDefault textColor={colors.greenColor} H5  style={styles.seeAllText}>View All</TextDefault>
+                <TextDefault textColor={colors.greenColor} H5 style={styles.seeAllText}>View All</TextDefault>
               </TouchableOpacity>
             </View>
             <FlatList

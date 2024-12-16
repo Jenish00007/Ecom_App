@@ -11,12 +11,14 @@ const styles = StyleSheet.create({
     height: height * 0.08,
     flexDirection: 'row',
     backgroundColor: colors.white,
+    
   },
   footerBtnContainer: {
     width: '20%',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  
   },
   imgContainer: {
     justifyContent: 'center',

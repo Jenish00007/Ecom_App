@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row', // Keeps the notification button and location at the same horizontal level
     justifyContent: 'space-between', // Ensures proper spacing
-    alignItems: 'flex-start', // Aligns items to the top
+    alignItems: 'center', // Aligns items to the top
     paddingHorizontal: scale(15),
     paddingVertical: verticalScale(10),
   },

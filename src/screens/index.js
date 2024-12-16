@@ -24,7 +24,7 @@ import Favourite from './Favourite/Favourite'
 import DeleteButton from './DeleteScreen/DeleteScreen'
 import DummyScreen from './Zipsiprofile/DummyScreen'
 import MyActiveOrder from './MyActiveOrder/MyActiveOrder'
-
+import Discoverplace from './Discoverplace/Discoverplace'
 import Chat from '../screens/chat'
 
 export {
@@ -55,5 +55,6 @@ export {
   DeleteButton,
   DummyScreen,
   MyActiveOrder,
-  Chat
+  Chat,
+  Discoverplace
 }
